@@ -261,8 +261,10 @@ class Plot_OldSync(with_metaclass(MetaParams, object)):
             # breaks the presentation of the date labels. why?
             # Applying the manual rotation with setp cures the problem
             # but the labels from all axis but the last have to be hidden
+            # 임시 해결: https://github.com/mementum/backtrader/pull/462
             for ax in laxis:
-                self.mpyplot.setp(ax.get_xticklabels(), visible=False)
+
+                self.mpyplot.setp(ax.get_xticklabels(), visible=True)
 
             self.mpyplot.setp(lastax.get_xticklabels(), visible=True,
                               rotation=self.pinf.sch.tickrotation)
