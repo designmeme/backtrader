@@ -257,6 +257,7 @@ class Trade(object):
         # Update size and keep a reference for logic an calculations
         oldsize = self.size
         self.size += size  # size will carry the opposite sign if reducing
+        self.size = round(self.size, 8)
 
         # Check if it has been currently opened
         self.justopened = bool(not oldsize and size)
@@ -289,6 +290,7 @@ class Trade(object):
             # position increased (be it positive or negative)
             # update the average price
             self.price = (oldsize * self.price + size * price) / self.size
+            self.price = round(self.price, 8)
             pnl = 0.0
 
         else:  # abs(self.size) < abs(oldsize)
