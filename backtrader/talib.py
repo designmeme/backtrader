@@ -115,9 +115,10 @@ else:
                 elif rfflag == FUNC_FLAGS_UNSTABLE:
                     unstable = True
                 elif rfflag == FUNC_FLAGS_CANDLESTICK:
-                    plotinfo['subplot'] = False
+                    # 캔들 패턴 인디케이터를 데이터와 함께 노출시 제대로 표시 안되어 subplot 사용으로 수정함.
+                    plotinfo['subplot'] = True
                     plotinfo['plotlinelabels'] = True
-                    iscandle = True
+                    iscandle = False
 
             # Prepare plotlines
             lines = _tabstract.output_names
