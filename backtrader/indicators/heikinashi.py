@@ -30,7 +30,7 @@ __all__ = ['HeikinAshi']
 
 
 class HeikinAshi(bt.Indicator):
-    '''
+    """
     Heikin Ashi candlesticks in the forms of lines
 
     Formula:
@@ -42,7 +42,7 @@ class HeikinAshi(bt.Indicator):
     See also:
         https://en.wikipedia.org/wiki/Candlestick_chart#Heikin_Ashi_candlesticks
         http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:heikin_ashi
-    '''
+    """
     lines = ('ha_open', 'ha_high', 'ha_low', 'ha_close',)
 
     linealias = (

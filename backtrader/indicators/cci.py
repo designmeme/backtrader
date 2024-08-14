@@ -25,7 +25,7 @@ from . import Indicator, Max, MovAv, MeanDev
 
 
 class CommodityChannelIndex(Indicator):
-    '''
+    """
     Introduced by Donald Lambert in 1980 to measure variations of the
     "typical price" (see below) from its mean to identify extremes and
     reversals
@@ -39,7 +39,7 @@ class CommodityChannelIndex(Indicator):
 
     See:
       - https://en.wikipedia.org/wiki/Commodity_channel_index
-    '''
+    """
     alias = ('CCI',)
 
     lines = ('cci',)

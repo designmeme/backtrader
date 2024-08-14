@@ -298,12 +298,12 @@ class ParamsBase(with_metaclass(MetaParams, object)):
 
 
 class ItemCollection(object):
-    '''
+    """
     Holds a collection of items that can be reached by
 
       - Index
       - Name (if set in the append operation)
-    '''
+    """
     def __init__(self):
         self._items = list()
         self._names = list()

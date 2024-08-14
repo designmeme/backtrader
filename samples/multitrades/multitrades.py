@@ -34,11 +34,11 @@ import mtradeobserver
 
 
 class MultiTradeStrategy(bt.Strategy):
-    '''This strategy buys/sells upong the close price crossing
+    """This strategy buys/sells upong the close price crossing
     upwards/downwards a Simple Moving Average.
 
     It can be a long-only strategy by setting the param "onlylong" to True
-    '''
+    """
     params = dict(
         period=15,
         stake=1,

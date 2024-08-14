@@ -62,7 +62,7 @@ class St(bt.Strategy):
 
 
 class SessionEndFiller(with_metaclass(bt.metabase.MetaParams, object)):
-    '''This data filter simply adds the time given in param ``endtime`` to the
+    """This data filter simply adds the time given in param ``endtime`` to the
     current data datetime
 
     It is intended for daily bars which come from sources with no time
@@ -70,18 +70,18 @@ class SessionEndFiller(with_metaclass(bt.metabase.MetaParams, object)):
     session
 
     The default value for ``endtime`` is 1 second before midnight 23:59:59
-    '''
+    """
     params = (('endtime', datetime.time(23, 59, 59)),)
 
     def __call__(self, data):
-        '''
+        """
         Params:
           - data: the data source to filter/process
 
         Returns:
           - False (always) because this filter does not remove bars from the
             stream
-        '''
+        """
         # Get time of current (from data source) bar
         dtime = datetime.combine(data.datetime.date(), self.p.endtime)
         data.datetime[0] = data.date2num(dtime)

@@ -27,7 +27,7 @@ import backtrader.indicators as btind
 
 
 class MA_CrossOver(bt.Strategy):
-    '''This is a long-only strategy which operates on a moving average cross
+    """This is a long-only strategy which operates on a moving average cross
 
     Note:
       - Although the default
@@ -47,7 +47,7 @@ class MA_CrossOver(bt.Strategy):
     Order Execution Type:
       - Market
 
-    '''
+    """
     alias = ('SMA_CrossOver',)
 
     params = (

@@ -32,11 +32,11 @@ BTVERSION = tuple(int(x) for x in bt.__version__.split('.'))
 
 
 class FixedPerc(bt.Sizer):
-    '''This sizer simply returns a fixed size for any operation
+    """This sizer simply returns a fixed size for any operation
 
     Params:
       - ``perc`` (default: ``0.20``) Perc of cash to allocate for operation
-    '''
+    """
 
     params = (
         ('perc', 0.20),  # perc of cash to use for operation
@@ -52,7 +52,7 @@ class FixedPerc(bt.Sizer):
 
 
 class TheStrategy(bt.Strategy):
-    '''
+    """
     This strategy is loosely based on some of the examples from the Van
     K. Tharp book: *Trade Your Way To Financial Freedom*. The logic:
 
@@ -69,7 +69,7 @@ class TheStrategy(bt.Strategy):
          exit.
        - If not, update the stop price if the new stop price would be higher
          than the current
-    '''
+    """
 
     params = (
         # Standard MACD Parameters

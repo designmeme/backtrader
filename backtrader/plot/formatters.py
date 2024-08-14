@@ -41,7 +41,7 @@ class MyVolFormatter(mplticker.Formatter):
         self.suffix = self.Suffixes[magnitude]
 
     def __call__(self, y, pos=0):
-        '''Return the label for time x at position pos'''
+        """Return the label for time x at position pos"""
 
         if y > self.volmax * 1.20:
             return ''
@@ -57,7 +57,7 @@ class MyDateFormatter(mplticker.Formatter):
         self.fmt = fmt
 
     def __call__(self, x, pos=0):
-        '''Return the label for time x at position pos'''
+        """Return the label for time x at position pos"""
         ind = int(round(x))
         if ind >= self.lendates:
             ind = self.lendates - 1

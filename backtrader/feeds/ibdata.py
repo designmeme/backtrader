@@ -34,7 +34,7 @@ from backtrader.stores import ibstore
 
 class MetaIBData(DataBase.__class__):
     def __init__(cls, name, bases, dct):
-        '''Class has already been created ... register'''
+        """Class has already been created ... register"""
         # Initialize the class
         super(MetaIBData, cls).__init__(name, bases, dct)
 
@@ -43,7 +43,7 @@ class MetaIBData(DataBase.__class__):
 
 
 class IBData(with_metaclass(MetaIBData, DataBase)):
-    '''Interactive Brokers Data Feed.
+    """Interactive Brokers Data Feed.
 
     Supports the following contract specifications in parameter ``dataname``:
 
@@ -191,7 +191,7 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
         Or else: ``IBData`` as ``IBData(dataname='AAPL', currency='USD')``
         which uses the default values (``STK`` and ``SMART``) and overrides
         the currency to be ``USD``
-    '''
+    """
     params = (
         ('sectype', 'STK'),  # usual industry value
         ('exchange', 'SMART'),  # usual industry value
@@ -253,8 +253,8 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
         return tz
 
     def islive(self):
-        '''Returns ``True`` to notify ``Cerebro`` that preloading and runonce
-        should be deactivated'''
+        """Returns ``True`` to notify ``Cerebro`` that preloading and runonce
+        should be deactivated"""
         return not self.p.historical
 
     def __init__(self, **kwargs):
@@ -263,13 +263,13 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
         self.pretradecontract = self.parsecontract(self.p.tradename)
 
     def setenvironment(self, env):
-        '''Receives an environment (cerebro) and passes it over to the store it
-        belongs to'''
+        """Receives an environment (cerebro) and passes it over to the store it
+        belongs to"""
         super(IBData, self).setenvironment(env)
         env.addstore(self.ib)
 
     def parsecontract(self, dataname):
-        '''Parses dataname generates a default contract'''
+        """Parses dataname generates a default contract"""
         # Set defaults for optional tokens in the ticker string
         if dataname is None:
             return None
@@ -340,8 +340,8 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
         return precon
 
     def start(self):
-        '''Starts the IB connecction and gets the real contract and
-        contractdetails if it exists'''
+        """Starts the IB connecction and gets the real contract and
+        contractdetails if it exists"""
         super(IBData, self).start()
         # Kickstart store and get queue to wait on
         self.qlive = self.ib.start(data=self)
@@ -405,12 +405,12 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
             self._st_start()
 
     def stop(self):
-        '''Stops and tells the store to stop'''
+        """Stops and tells the store to stop"""
         super(IBData, self).stop()
         self.ib.stop()
 
     def reqdata(self):
-        '''request real-time data. checks cash vs non-cash) and param useRT'''
+        """request real-time data. checks cash vs non-cash) and param useRT"""
         if self.contract is None or self._subcription_valid:
             return
 
@@ -423,7 +423,7 @@ class IBData(with_metaclass(MetaIBData, DataBase)):
         return self.qlive
 
     def canceldata(self):
-        '''Cancels Market Data subscription, checking asset type and rtbar'''
+        """Cancels Market Data subscription, checking asset type and rtbar"""
         if self.contract is None:
             return
 

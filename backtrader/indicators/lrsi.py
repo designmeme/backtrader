@@ -28,7 +28,7 @@ __all__ = ['LaguerreRSI', 'LRSI', 'LaguerreFilter', 'LAGF']
 
 
 class LaguerreRSI(PeriodN):
-    '''
+    """
     Defined by John F. Ehlers in `Cybernetic Analysis for Stock and Futures`,
     2004, published by Wiley. `ISBN: 978-0-471-46307-8`
 
@@ -38,7 +38,7 @@ class LaguerreRSI(PeriodN):
 
     ``gamma`` is meant to have values between ``0.2`` and ``0.8``, with the
     best balance found theoretically at the default of ``0.5``
-    '''
+    """
     alias = ('LRSI',)
     lines = ('lrsi',)
     params = (
@@ -86,13 +86,13 @@ class LaguerreRSI(PeriodN):
 
 
 class LaguerreFilter(PeriodN):
-    '''
+    """
     Defined by John F. Ehlers in `Cybernetic Analysis for Stock and Futures`,
     2004, published by Wiley. `ISBN: 978-0-471-46307-8`
 
     ``gamma`` is meant to have values between ``0.2`` and ``0.8``, with the
     best balance found theoretically at the default of ``0.5``
-    '''
+    """
     alias = ('LAGF',)
     lines = ('lfilter',)
     params = (('gamma', 0.5),)

@@ -28,7 +28,7 @@ from backtrader import Analyzer
 
 
 class AnnualReturn(Analyzer):
-    '''
+    """
     This analyzer calculates the AnnualReturns by looking at the beginning
     and end of the year
 
@@ -45,7 +45,7 @@ class AnnualReturn(Analyzer):
     **get_analysis**:
 
       - Returns a dictionary of annual returns (key: year)
-    '''
+    """
 
     def stop(self):
         # Must have stats.broker

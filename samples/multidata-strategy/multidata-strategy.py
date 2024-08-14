@@ -31,7 +31,7 @@ import backtrader.indicators as btind
 
 
 class MultiDataStrategy(bt.Strategy):
-    '''
+    """
     This strategy operates on 2 datas. The expectation is that the 2 datas are
     correlated and the 2nd data is used to generate signals on the 1st
 
@@ -40,7 +40,7 @@ class MultiDataStrategy(bt.Strategy):
         when the close price crosses upwwards/downwards
 
     The strategy is a long-only strategy
-    '''
+    """
     params = dict(
         period=15,
         stake=10,

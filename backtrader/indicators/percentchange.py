@@ -28,10 +28,10 @@ __all__ = ['PercentChange', 'PctChange']
 
 
 class PercentChange(Indicator):
-    '''
+    """
       Measures the perccentage change of the current value with respect to that
       of period bars ago
-    '''
+    """
     alias = ('PctChange',)
     lines = ('pctchange',)
 

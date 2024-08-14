@@ -31,7 +31,7 @@ from . import TimeReturn, PositionsValue, Transactions, GrossLeverage
 
 
 class PyFolio(bt.Analyzer):
-    '''This analyzer uses 4 children analyzers to collect data and transforms it
+    """This analyzer uses 4 children analyzers to collect data and transforms it
     in to a data set compatible with ``pyfolio``
 
     Children Analyzer
@@ -77,7 +77,7 @@ class PyFolio(bt.Analyzer):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
     params = (
         ('timeframe', bt.TimeFrame.Days),
         ('compression', 1)
@@ -100,7 +100,7 @@ class PyFolio(bt.Analyzer):
         self.rets['gross_lev'] = self._gross_lev.get_analysis()
 
     def get_pf_items(self):
-        '''Returns a tuple of 4 elements which can be used for further processing with
+        """Returns a tuple of 4 elements which can be used for further processing with
           ``pyfolio``
 
           returns, positions, transactions, gross_leverage
@@ -111,7 +111,7 @@ class PyFolio(bt.Analyzer):
         by, for example, ``pyfolio.create_full_tear_sheet``
 
         The method will break if ``pandas`` is not installed
-        '''
+        """
         # keep import local to avoid disturbing installations with no pandas
         import pandas
         from pandas import DataFrame as DF

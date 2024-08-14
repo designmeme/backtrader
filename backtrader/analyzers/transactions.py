@@ -29,7 +29,7 @@ from backtrader import Order, Position
 
 
 class Transactions(bt.Analyzer):
-    '''This analyzer reports the transactions occurred with each an every data in
+    """This analyzer reports the transactions occurred with each an every data in
     the system
 
     It looks at the order execution bits to create a ``Position`` starting from
@@ -56,7 +56,7 @@ class Transactions(bt.Analyzer):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
     params = (
         ('headers', False),
         ('_pfheaders', ('date', 'amount', 'price', 'sid', 'symbol', 'value')),

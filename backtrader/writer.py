@@ -41,7 +41,7 @@ class WriterBase(with_metaclass(bt.MetaParams, object)):
 
 
 class WriterFile(WriterBase):
-    '''The system wide writer class.
+    """The system wide writer class.
 
     It can be parametrized with:
 
@@ -89,7 +89,7 @@ class WriterFile(WriterBase):
         Number of decimal places to round floats down to. With ``None`` no
         rounding is performed
 
-    '''
+    """
     params = (
         ('out', None),
         ('close_out', False),

@@ -240,12 +240,12 @@ class _BaseResampler(with_metaclass(metabase.MetaParams, object)):
                 data.num2date(self.bar.datetime).year)
 
     def _gettmpoint(self, tm):
-        '''Returns the point of time intraday for a given time according to the
+        """Returns the point of time intraday for a given time according to the
         timeframe
 
           - Ex 1: 00:05:00 in minutes -> point = 5
           - Ex 2: 00:05:20 in seconds -> point = 5 * 60 + 20 = 320
-        '''
+        """
         point = tm.hour * 60 + tm.minute
         restpoint = 0
 
@@ -297,13 +297,13 @@ class _BaseResampler(with_metaclass(metabase.MetaParams, object)):
         return ret
 
     def check(self, data, _forcedata=None):
-        '''Called to check if the current stored bar has to be delivered in
+        """Called to check if the current stored bar has to be delivered in
         spite of the data not having moved forward. If no ticks from a live
         feed come in, a 5 second resampled bar could be delivered 20 seconds
         later. When this method is called the wall clock (incl data time
         offset) is called to check if the time has gone so far as to have to
         deliver the already stored data
-        '''
+        """
         if not self.bar.isopen():
             return
 
@@ -416,14 +416,14 @@ class _BaseResampler(with_metaclass(metabase.MetaParams, object)):
         return dtnum
 
     def _adjusttime(self, greater=False, forcedata=None):
-        '''
+        """
         Adjusts the time of calculated bar (from underlying data source) by
         using the timeframe to the appropriate boundary, with compression taken
         into account
 
         Depending on param ``rightedge`` uses the starting boundary or the
         ending one
-        '''
+        """
         dtnum = self._calcadjtime(greater=greater)
         if greater and dtnum <= self.bar.datetime:
             return False
@@ -433,7 +433,7 @@ class _BaseResampler(with_metaclass(metabase.MetaParams, object)):
 
 
 class Resampler(_BaseResampler):
-    '''This class resamples data of a given timeframe to a larger timeframe.
+    """This class resamples data of a given timeframe to a larger timeframe.
 
     Params
 
@@ -466,7 +466,7 @@ class Resampler(_BaseResampler):
 
         If True the used boundary for the time will be hh:mm:05 (the ending
         boundary)
-    '''
+    """
     params = (
         ('bar2edge', True),
         ('adjbartime', True),
@@ -476,12 +476,12 @@ class Resampler(_BaseResampler):
     replaying = False
 
     def last(self, data):
-        '''Called when the data is no longer producing bars
+        """Called when the data is no longer producing bars
 
         Can be called multiple times. It has the chance to (for example)
         produce extra bars which may still be accumulated and have to be
         delivered
-        '''
+        """
         if self.bar.isopen():
             if self.doadjusttime:
                 self._adjusttime()
@@ -493,7 +493,7 @@ class Resampler(_BaseResampler):
         return False
 
     def __call__(self, data, fromcheck=False, forcedata=None):
-        '''Called for each set of values produced by the data source'''
+        """Called for each set of values produced by the data source"""
         consumed = False
         onedge = False
         docheckover = True
@@ -561,7 +561,7 @@ class Resampler(_BaseResampler):
 
 
 class Replayer(_BaseResampler):
-    '''This class replays data of a given timeframe to a larger timeframe.
+    """This class replays data of a given timeframe to a larger timeframe.
 
     It simulates the action of the market by slowly building up (for ex.) a
     daily bar from tick/seconds/minutes data
@@ -603,7 +603,7 @@ class Replayer(_BaseResampler):
 
         If True the used boundary for the time will be hh:mm:05 (the ending
         boundary)
-    '''
+    """
     params = (
         ('bar2edge', True),
         ('adjbartime', False),

@@ -56,7 +56,7 @@ class _StochasticBase(Indicator):
 
 
 class StochasticFast(_StochasticBase):
-    '''
+    """
     By Dr. George Lane in the 50s. It compares a closing price to the price
     range and tries to show convergence if the closing prices are close to the
     extremes
@@ -77,7 +77,7 @@ class StochasticFast(_StochasticBase):
 
     See:
       - http://en.wikipedia.org/wiki/Stochastic_oscillator
-    '''
+    """
     def __init__(self):
         super(StochasticFast, self).__init__()
         self.lines.percK = self.k
@@ -85,7 +85,7 @@ class StochasticFast(_StochasticBase):
 
 
 class Stochastic(_StochasticBase):
-    '''
+    """
     The regular (or slow version) adds an additional moving average layer and
     thus:
 
@@ -99,7 +99,7 @@ class Stochastic(_StochasticBase):
 
     See:
       - http://en.wikipedia.org/wiki/Stochastic_oscillator
-    '''
+    """
     alias = ('StochasticSlow',)
     params = (('period_dslow', 3),)
 
@@ -115,7 +115,7 @@ class Stochastic(_StochasticBase):
 
 
 class StochasticFull(_StochasticBase):
-    '''
+    """
     This version displays the 3 possible lines:
 
       - percK
@@ -129,7 +129,7 @@ class StochasticFull(_StochasticBase):
 
     See:
       - http://en.wikipedia.org/wiki/Stochastic_oscillator
-    '''
+    """
     lines = ('percDSlow',)
     params = (('period_dslow', 3),)
 

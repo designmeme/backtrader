@@ -25,7 +25,7 @@ from . import (SumN, MovingAverageBase, ExponentialSmoothingDynamic)
 
 
 class AdaptiveMovingAverage(MovingAverageBase):
-    '''
+    """
     Defined by Perry Kaufman in his book `"Smarter Trading"`.
 
     It is A Moving Average with a continuously scaled smoothing factor by
@@ -56,7 +56,7 @@ class AdaptiveMovingAverage(MovingAverageBase):
       - http://fxcodebase.com/wiki/index.php/Kaufman's_Adaptive_Moving_Average_(KAMA)
       - http://www.metatrader5.com/en/terminal/help/analytics/indicators/trend_indicators/ama
       - http://help.cqg.com/cqgic/default.htm#!Documents/adaptivemovingaverag2.htm
-    '''
+    """
     alias = ('KAMA', 'MovingAverageAdaptive',)
     lines = ('kama',)
     params = (('fast', 2), ('slow', 30))

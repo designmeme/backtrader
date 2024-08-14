@@ -31,9 +31,9 @@ import backtrader.indicators as btind
 
 
 class PlotStrategy(bt.Strategy):
-    '''
+    """
     The strategy does nothing but create indicators for plotting purposes
-    '''
+    """
     params = dict(
         smasubplot=False,  # default for Moving averages
         nomacdplot=False,

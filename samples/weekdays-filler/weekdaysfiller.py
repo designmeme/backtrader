@@ -25,7 +25,7 @@ import datetime
 
 
 class WeekDaysFiller(object):
-    '''Bar Filler to add missing calendar days to trading days'''
+    """Bar Filler to add missing calendar days to trading days"""
     # kickstart value for date comparisons
     ONEDAY = datetime.timedelta(days=1)
     lastdt = datetime.date.max - ONEDAY
@@ -35,7 +35,7 @@ class WeekDaysFiller(object):
         self.voidbar = [float('Nan')] * data.size()  # init a void bar
 
     def __call__(self, data):
-        '''Empty bars (NaN) or with last close price are added for weekdays with no
+        """Empty bars (NaN) or with last close price are added for weekdays with no
         data
 
         Params:
@@ -44,7 +44,7 @@ class WeekDaysFiller(object):
         Returns:
           - True (always): bars are removed (even if put back on the stack)
 
-        '''
+        """
         dt = data.datetime.date()  # current date in int format
         lastdt = self.lastdt + self.ONEDAY  # move last seen data once forward
 

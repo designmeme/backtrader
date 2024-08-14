@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-'''
+"""
 
 .. module:: lineroot
 
@@ -27,7 +27,7 @@ lines at once.
 
 .. moduleauthor:: Daniel Rodriguez
 
-'''
+"""
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
@@ -42,7 +42,7 @@ from . import metabase
 
 
 class LineAlias(object):
-    ''' Descriptor class that store a line reference and returns that line
+    """ Descriptor class that store a line reference and returns that line
     from the owner
 
     Keyword Args:
@@ -53,7 +53,7 @@ class LineAlias(object):
     the *line* reference because this is a constant along the live of the
     descriptor instance, but rather to set the value of the *line* at the
     instant '0' (the current one)
-    '''
+    """
 
     def __init__(self, line):
         self.line = line
@@ -62,11 +62,11 @@ class LineAlias(object):
         return obj.lines[self.line]
 
     def __set__(self, obj, value):
-        '''
+        """
         A line cannot be "set" once it has been created. But the values
         inside the line can be "set". This is achieved by adding a binding
         to the line inside "value"
-        '''
+        """
         if isinstance(value, LineMultiple):
             value = value.lines[0]
 
@@ -82,7 +82,7 @@ class LineAlias(object):
 
 
 class Lines(object):
-    '''
+    """
     Defines an "array" of lines which also has most of the interface of
     a LineBuffer class (forward, rewind, advance...).
 
@@ -90,7 +90,7 @@ class Lines(object):
 
     The class can autosubclass itself (_derive) to hold new lines keeping them
     in the defined order.
-    '''
+    """
     _getlinesbase = classmethod(lambda cls: ())
     _getlines = classmethod(lambda cls: ())
     _getlinesextra = classmethod(lambda cls: 0)
@@ -99,7 +99,7 @@ class Lines(object):
     @classmethod
     def _derive(cls, name, lines, extralines, otherbases, linesoverride=False,
                 lalias=None):
-        '''
+        """
         Creates a subclass of this class with the lines of this class as
         initial input for the subclass. It will include num "extralines" and
         lines present in "otherbases"
@@ -109,7 +109,7 @@ class Lines(object):
         "linesoverride": if True the lines of all bases will be discarded and
         the baseclass will be the topmost class "Lines". This is intended to
         create a new hierarchy
-        '''
+        """
         obaseslines = ()
         obasesextralines = 0
 
@@ -180,9 +180,9 @@ class Lines(object):
 
     @classmethod
     def _getlinealias(cls, i):
-        '''
+        """
         Return the alias for a line given the index
-        '''
+        """
         lines = cls._getlines()
         if i >= len(lines):
             return ''
@@ -197,10 +197,10 @@ class Lines(object):
         return iter(self.lines[0:self.size()])
 
     def __init__(self, initlines=None):
-        '''
+        """
         Create the lines recording during "_derive" or else use the
         provided "initlines"
-        '''
+        """
         self.lines = list()
         for line, linealias in enumerate(self._getlines()):
             kwargs = dict()
@@ -214,9 +214,9 @@ class Lines(object):
                 self.lines.append(initlines[i])
 
     def __len__(self):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         return len(self.lines[0])
 
     def size(self):
@@ -229,81 +229,81 @@ class Lines(object):
         return self._getlinesextra()
 
     def __getitem__(self, line):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         return self.lines[line]
 
     def get(self, ago=0, size=1, line=0):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         return self.lines[line].get(ago, size=size)
 
     def __setitem__(self, line, value):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         setattr(self, self._getlinealias(line), value)
 
     def forward(self, value=NAN, size=1):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.forward(value, size=size)
 
     def backwards(self, size=1, force=False):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.backwards(size, force=force)
 
     def rewind(self, size=1):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.rewind(size)
 
     def extend(self, value=NAN, size=0):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.extend(value, size)
 
     def reset(self):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.reset()
 
     def home(self):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.home()
 
     def advance(self, size=1):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         for line in self.lines:
             line.advance(size)
 
     def buflen(self, line=0):
-        '''
+        """
         Proxy line operation
-        '''
+        """
         return self.lines[line].buflen()
 
 
 class MetaLineSeries(LineMultiple.__class__):
-    '''
+    """
     Dirty job manager for a LineSeries
 
       - During __new__ (class creation), it reads "lines", "plotinfo",
@@ -321,14 +321,14 @@ class MetaLineSeries(LineMultiple.__class__):
         Remember that this Metaclass has a MetaParams (from metabase)
         as root class and therefore "params" defined for the class have been
         removed from kwargs at an earlier state
-    '''
+    """
 
     def __new__(meta, name, bases, dct):
-        '''
+        """
         Intercept class creation, identifiy lines/plotinfo/plotlines class
         attributes and create corresponding classes for them which take over
         the class attributes
-        '''
+        """
 
         # Get the aliases - don't leave it there for subclasses
         aliases = dct.setdefault('alias', ())
@@ -404,11 +404,11 @@ class MetaLineSeries(LineMultiple.__class__):
         return cls
 
     def donew(cls, *args, **kwargs):
-        '''
+        """
         Intercept instance creation, take over lines/plotinfo/plotlines
         class attributes by creating corresponding instance variables and add
         aliases for "lines" and the "lines" held within it
-        '''
+        """
         # _obj.plotinfo shadows the plotinfo (class) definition in the class
         plotinfo = cls.plotinfo()
 
@@ -510,7 +510,7 @@ class LineSeries(with_metaclass(MetaLineSeries, LineMultiple)):
         return lineobj
 
     def __call__(self, ago=None, line=-1):
-        '''Returns either a delayed verison of itself in the form of a
+        """Returns either a delayed verison of itself in the form of a
         LineDelay object or a timeframe adapting version with regards to a ago
 
         Param: ago (default: None)
@@ -533,7 +533,7 @@ class LineSeries(with_metaclass(MetaLineSeries, LineMultiple)):
           form
 
           The referenced line (index or name) will be LineDelayed
-        '''
+        """
         from .lineiterator import LinesCoupler  # avoid circular import
 
         if ago is None or isinstance(ago, LineRoot):
@@ -573,7 +573,7 @@ class LineSeries(with_metaclass(MetaLineSeries, LineMultiple)):
 
 
 class LineSeriesStub(LineSeries):
-    '''Simulates a LineMultiple object based on LineSeries from a single line
+    """Simulates a LineMultiple object based on LineSeries from a single line
 
     The index management operations are overriden to take into account if the
     line is a slave, ie:
@@ -588,7 +588,7 @@ class LineSeriesStub(LineSeries):
       - Once under when the LineMultiple object is advanced (because it
         advances all lines it is holding
       - Again as part of the regular management of the object holding it
-    '''
+    """
 
     extralines = 1
 

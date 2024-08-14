@@ -26,7 +26,7 @@ import backtrader as bt
 
 
 class PositionsValue(bt.Analyzer):
-    '''This analyzer reports the value of the positions of the current set of
+    """This analyzer reports the value of the positions of the current set of
     datas
 
     Params:
@@ -59,7 +59,7 @@ class PositionsValue(bt.Analyzer):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
     params = (
         ('headers',  False),
         ('cash', False),

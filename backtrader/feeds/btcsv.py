@@ -28,13 +28,13 @@ from ..utils import date2num
 
 
 class BacktraderCSVData(feed.CSVDataBase):
-    '''
+    """
     Parses a self-defined CSV Data used for testing.
 
     Specific parameters:
 
       - ``dataname``: The filename to parse or a file-like object
-    '''
+    """
 
     def _loadline(self, linetokens):
         itoken = iter(linetokens)

@@ -31,7 +31,7 @@ __all__ = ['LogReturnsRolling']
 
 
 class LogReturnsRolling(bt.TimeFrameAnalyzerBase):
-    '''This analyzer calculates rolling returns for a given timeframe and
+    """This analyzer calculates rolling returns for a given timeframe and
     compression
 
     Params:
@@ -91,7 +91,7 @@ class LogReturnsRolling(bt.TimeFrameAnalyzerBase):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
 
     params = (
         ('data', None),

@@ -25,7 +25,7 @@ from backtrader import TimeFrameAnalyzerBase
 
 
 class TimeReturn(TimeFrameAnalyzerBase):
-    '''This analyzer calculates the Returns by looking at the beginning
+    """This analyzer calculates the Returns by looking at the beginning
     and end of the timeframe
 
     Params:
@@ -85,7 +85,7 @@ class TimeReturn(TimeFrameAnalyzerBase):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
 
     params = (
         ('data', None),

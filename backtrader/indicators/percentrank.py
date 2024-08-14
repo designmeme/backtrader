@@ -30,10 +30,10 @@ __all__ = ['PercentRank', 'PctRank']
 
 
 class PercentRank(BaseApplyN):
-    '''
+    """
     Measures the percent rank of the current value with respect to that of
     period bars ago
-    '''
+    """
     alias = ('PctRank',)
     lines = ('pctrank',)
     params = (

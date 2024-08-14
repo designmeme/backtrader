@@ -28,7 +28,7 @@ from backtrader import TimeFrameAnalyzerBase
 
 
 class Returns(TimeFrameAnalyzerBase):
-    '''Total, Average, Compound and Annualized Returns calculated using a
+    """Total, Average, Compound and Annualized Returns calculated using a
     logarithmic approach
 
     See:
@@ -87,7 +87,7 @@ class Returns(TimeFrameAnalyzerBase):
           - ``rnorm``: Annualized/Normalized return
           - ``rnorm100``: Annualized/Normalized return expressed in 100%
 
-    '''
+    """
 
     params = (
         ('tann', None),

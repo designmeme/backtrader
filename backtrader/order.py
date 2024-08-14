@@ -33,7 +33,7 @@ from .utils import AutoOrderedDict
 
 
 class OrderExecutionBit(object):
-    '''
+    """
     Intended to hold information about order execution. A "bit" does not
     determine if the order has been fully/partially executed, it just holds
     information.
@@ -57,7 +57,7 @@ class OrderExecutionBit(object):
       - psize: current open position size
       - pprice: current open position price
 
-    '''
+    """
 
     def __init__(self,
                  dt=None, size=0, price=0.0,
@@ -86,7 +86,7 @@ class OrderExecutionBit(object):
 
 
 class OrderData(object):
-    '''
+    """
     Holds actual order data for Creation and Execution.
 
     In the case of Creation the request made and in the case of Execution the
@@ -113,7 +113,7 @@ class OrderData(object):
       - psize: current open position size
       - pprice: current open position price
 
-    '''
+    """
     # According to the docs, collections.deque is thread-safe with appends at
     # both ends, there will be no pop (nowhere) and therefore to know which the
     # new exbits are two indices are needed. At time of cloning (__copy__) the
@@ -390,11 +390,11 @@ class OrderBase(with_metaclass(MetaParams, object)):
         return obj  # status could change in next to completed
 
     def getstatusname(self, status=None):
-        '''Returns the name for a given status or the one of the order'''
+        """Returns the name for a given status or the one of the order"""
         return self.Status[self.status if status is None else status]
 
     def getordername(self, exectype=None):
-        '''Returns the name for a given exectype or the one of the order'''
+        """Returns the name for a given exectype or the one of the order"""
         return self.ExecTypes[self.exectype if exectype is None else exectype]
 
     @classmethod
@@ -402,7 +402,7 @@ class OrderBase(with_metaclass(MetaParams, object)):
         return getattr(cls, exectype)
 
     def ordtypename(self, ordtype=None):
-        '''Returns the name for a given ordtype or the one of the order'''
+        """Returns the name for a given ordtype or the one of the order"""
         return self.OrdTypes[self.ordtype if ordtype is None else ordtype]
 
     def active(self):
@@ -412,20 +412,20 @@ class OrderBase(with_metaclass(MetaParams, object)):
         self._active = True
 
     def alive(self):
-        '''Returns True if the order is in a status in which it can still be
+        """Returns True if the order is in a status in which it can still be
         executed
-        '''
+        """
         return self.status in [Order.Created, Order.Submitted,
                                Order.Partial, Order.Accepted]
 
     def addcomminfo(self, comminfo):
-        '''Stores a CommInfo scheme associated with the asset'''
+        """Stores a CommInfo scheme associated with the asset"""
         self.comminfo = comminfo
 
     def addinfo(self, **kwargs):
-        '''Add the keys, values of kwargs to the internal info dictionary to
+        """Add the keys, values of kwargs to the internal info dictionary to
         hold custom information in the order
-        '''
+        """
         for key, val in iteritems(kwargs):
             self.info[key] = val
 
@@ -436,40 +436,40 @@ class OrderBase(with_metaclass(MetaParams, object)):
         return self.ref != other.ref
 
     def isbuy(self):
-        '''Returns True if the order is a Buy order'''
+        """Returns True if the order is a Buy order"""
         return self.ordtype == self.Buy
 
     def issell(self):
-        '''Returns True if the order is a Sell order'''
+        """Returns True if the order is a Sell order"""
         return self.ordtype == self.Sell
 
     def setposition(self, position):
-        '''Receives the current position for the asset and stotres it'''
+        """Receives the current position for the asset and stotres it"""
         self.position = position
 
     def submit(self, broker=None):
-        '''Marks an order as submitted and stores the broker to which it was
-        submitted'''
+        """Marks an order as submitted and stores the broker to which it was
+        submitted"""
         self.status = Order.Submitted
         self.broker = broker
         self.plen = len(self.data)
 
     def accept(self, broker=None):
-        '''Marks an order as accepted'''
+        """Marks an order as accepted"""
         self.status = Order.Accepted
         self.broker = broker
 
     def brokerstatus(self):
-        '''Tries to retrieve the status from the broker in which the order is.
+        """Tries to retrieve the status from the broker in which the order is.
 
-        Defaults to last known status if no broker is associated'''
+        Defaults to last known status if no broker is associated"""
         if self.broker:
             return self.broker.orderstatus(self)
 
         return self.status
 
     def reject(self, broker=None):
-        '''Marks an order as rejected'''
+        """Marks an order as rejected"""
         if self.status == Order.Rejected:
             return False
 
@@ -480,23 +480,23 @@ class OrderBase(with_metaclass(MetaParams, object)):
         return True
 
     def cancel(self):
-        '''Marks an order as cancelled'''
+        """Marks an order as cancelled"""
         self.status = Order.Canceled
         if not self.p.simulated:
             self.executed.dt = self.data.datetime[0]
 
     def margin(self):
-        '''Marks an order as having met a margin call'''
+        """Marks an order as having met a margin call"""
         self.status = Order.Margin
         if not self.p.simulated:
             self.executed.dt = self.data.datetime[0]
 
     def completed(self):
-        '''Marks an order as completely filled'''
+        """Marks an order as completely filled"""
         self.status = self.Completed
 
     def partial(self):
-        '''Marks an order as partially filled'''
+        """Marks an order as partially filled"""
         self.status = self.Partial
 
     def execute(self, dt, size, price,
@@ -505,7 +505,7 @@ class OrderBase(with_metaclass(MetaParams, object)):
                 margin, pnl,
                 psize, pprice):
 
-        '''Receives data execution input and stores it'''
+        """Receives data execution input and stores it"""
         if not size:
             return
 
@@ -517,7 +517,7 @@ class OrderBase(with_metaclass(MetaParams, object)):
         self.executed.margin = margin
 
     def expire(self):
-        '''Marks an order as expired. Returns True if it worked'''
+        """Marks an order as expired. Returns True if it worked"""
         self.status = self.Expired
         return True
 
@@ -526,7 +526,7 @@ class OrderBase(with_metaclass(MetaParams, object)):
 
 
 class Order(OrderBase):
-    '''
+    """
     Class which holds creation/execution data and type of oder.
 
     The order may have the following status:
@@ -561,7 +561,7 @@ class Order(OrderBase):
       - isbuy(): returns bool indicating if the order buys
       - issell(): returns bool indicating if the order sells
       - alive(): returns bool if order is in status Partial or Accepted
-    '''
+    """
 
     def execute(self, dt, size, price,
                 closed, closedvalue, closedcomm,

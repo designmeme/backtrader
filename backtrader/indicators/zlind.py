@@ -30,7 +30,7 @@ from . import MovingAverageBase, MovAv
 
 
 class ZeroLagIndicator(MovingAverageBase):
-    '''By John Ehlers and Ric Way
+    """By John Ehlers and Ric Way
 
     The zero-lag indicator (ZLIndicator) is a variation of the EMA
     which modifies the EMA by trying to minimize the error (distance price -
@@ -53,7 +53,7 @@ class ZeroLagIndicator(MovingAverageBase):
     See also:
       - http://www.mesasoftware.com/papers/ZeroLag.pdf
 
-    '''
+    """
     alias = ('ZLIndicator', 'ZLInd', 'EC', 'ErrorCorrecting',)
     lines = ('ec',)
     params = (

@@ -41,7 +41,7 @@ class Logic(LineActions):
 
 
 class DivByZero(Logic):
-    '''This operation is a Lines object and fills it values by executing a
+    """This operation is a Lines object and fills it values by executing a
     division on the numerator / denominator arguments and avoiding a division
     by zero exception by checking the denominator
 
@@ -50,7 +50,7 @@ class DivByZero(Logic):
       - b: denominator (numeric or iterable object ... mostly a Lines object)
       - zero (def: 0.0): value to apply if division by zero would be raised
 
-    '''
+    """
     def __init__(self, a, b, zero=0.0):
         super(DivByZero, self).__init__(a, b)
         self.a = a
@@ -74,7 +74,7 @@ class DivByZero(Logic):
 
 
 class DivZeroByZero(Logic):
-    '''This operation is a Lines object and fills it values by executing a
+    """This operation is a Lines object and fills it values by executing a
     division on the numerator / denominator arguments and avoiding a division
     by zero exception or an indetermination by checking the
     denominator/numerator pair
@@ -84,7 +84,7 @@ class DivZeroByZero(Logic):
       - b: denominator (numeric or iterable object ... mostly a Lines object)
       - single (def: +inf): value to apply if division is x / 0
       - dual (def: 0.0): value to apply if division is 0 / 0
-    '''
+    """
     def __init__(self, a, b, single=float('inf'), dual=0.0):
         super(DivZeroByZero, self).__init__(a, b)
         self.a = a

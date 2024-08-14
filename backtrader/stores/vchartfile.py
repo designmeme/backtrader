@@ -27,7 +27,7 @@ import backtrader as bt
 
 
 class VChartFile(bt.Store):
-    '''Store provider for Visual Chart binary files
+    """Store provider for Visual Chart binary files
 
     Params:
 
@@ -35,7 +35,7 @@ class VChartFile(bt.Store):
 
         If the path is ``None`` and running under *Windows*, the registry will
         be examined to find the root directory of the *Visual Chart* files.
-    '''
+    """
 
     params = (
         ('path', None),

@@ -25,7 +25,7 @@ from . import Indicator, CmpEx
 
 
 class PivotPoint(Indicator):
-    '''
+    """
     Defines a level of significance by taking into account the average of price
     bar components of the past period of a larger timeframe. For example when
     operating with days, the values are taking from the already "past" month
@@ -61,7 +61,7 @@ class PivotPoint(Indicator):
     See:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:pivot_points
       - https://en.wikipedia.org/wiki/Pivot_point_(technical_analysis)
-    '''
+    """
     lines = ('p', 's1', 's2', 'r1', 'r2',)
     plotinfo = dict(subplot=False)
 
@@ -104,7 +104,7 @@ class PivotPoint(Indicator):
 
 
 class FibonacciPivotPoint(Indicator):
-    '''
+    """
     Defines a level of significance by taking into account the average of price
     bar components of the past period of a larger timeframe. For example when
     operating with days, the values are taking from the already "past" month
@@ -143,7 +143,7 @@ class FibonacciPivotPoint(Indicator):
 
     See:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:pivot_points
-    '''
+    """
     lines = ('p', 's1', 's2', 's3', 'r1', 'r2', 'r3')
     plotinfo = dict(subplot=False)
     params = (
@@ -190,7 +190,7 @@ class FibonacciPivotPoint(Indicator):
 
 
 class DemarkPivotPoint(Indicator):
-    '''
+    """
     Defines a level of significance by taking into account the average of price
     bar components of the past period of a larger timeframe. For example when
     operating with days, the values are taking from the already "past" month
@@ -230,7 +230,7 @@ class DemarkPivotPoint(Indicator):
 
     See:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:pivot_points
-    '''
+    """
     lines = ('p', 's1', 'r1',)
     plotinfo = dict(subplot=False)
     params = (

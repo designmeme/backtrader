@@ -26,7 +26,7 @@ from . import (Indicator, Highest, Lowest, If, UpDay, DownDay, Accum, TrueLow,
 
 
 class WilliamsR(Indicator):
-    '''
+    """
     Developed by Larry Williams to show the relation of closing prices to
     the highest-lowest range of a given period.
 
@@ -39,7 +39,7 @@ class WilliamsR(Indicator):
 
     See:
       - http://en.wikipedia.org/wiki/Williams_%25R
-    '''
+    """
     lines = ('percR',)
     params = (('period', 14),
               ('upperband', -20.0),
@@ -62,7 +62,7 @@ class WilliamsR(Indicator):
 
 
 class WilliamsAD(Indicator):
-    '''
+    """
     By Larry Williams. It does cumulatively measure if the price is
     accumulating (upwards) or distributing (downwards) by using the concept of
     UpDays and DownDays.
@@ -74,7 +74,7 @@ class WilliamsAD(Indicator):
     See:
     - http://www.metastock.com/Customer/Resources/TAAZ/?p=125
     - http://ta.mql4.com/indicators/trends/williams_accumulation_distribution
-    '''
+    """
     lines = ('ad',)
 
     def __init__(self):

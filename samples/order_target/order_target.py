@@ -28,7 +28,7 @@ import backtrader as bt
 
 
 class TheStrategy(bt.Strategy):
-    '''
+    """
     This strategy is loosely based on some of the examples from the Van
     K. Tharp book: *Trade Your Way To Financial Freedom*. The logic:
 
@@ -45,7 +45,7 @@ class TheStrategy(bt.Strategy):
          exit.
        - If not, update the stop price if the new stop price would be higher
          than the current
-    '''
+    """
 
     params = (
         ('use_target_size', False),

@@ -27,7 +27,7 @@ from . import Indicator, MovingAverage
 
 
 class EnvelopeMixIn(object):
-    '''
+    """
     MixIn class to create a subclass with another indicator. The main line of
     that indicator will be surrounded by an upper and lower band separated a
     given "perc"entage from the input main line
@@ -43,7 +43,7 @@ class EnvelopeMixIn(object):
 
     See also:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_envelopes
-    '''
+    """
     lines = ('top', 'bot',)
     params = (('perc', 2.5),)
     plotlines = dict(top=dict(_samecolor=True), bot=dict(_samecolor=True),)
@@ -74,7 +74,7 @@ class _EnvelopeBase(Indicator):
 
 
 class Envelope(_EnvelopeBase, EnvelopeMixIn):
-    '''
+    """
     It creates envelopes bands separated from the source data by a given
     percentage
 
@@ -85,13 +85,13 @@ class Envelope(_EnvelopeBase, EnvelopeMixIn):
 
     See also:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_envelopes
-    '''
+    """
 
 
 # Automatic creation of Moving Average Envelope classes
 
 for movav in MovingAverage._movavs[1:]:
-    _newclsdoc = '''
+    _newclsdoc = """
     %s and envelope bands separated "perc" from it
 
     Formula:
@@ -101,7 +101,7 @@ for movav in MovingAverage._movavs[1:]:
 
     See also:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:moving_average_envelopes
-    '''
+    """
     # Skip aliases - they will be created automatically
     if getattr(movav, 'aliased', ''):
         continue

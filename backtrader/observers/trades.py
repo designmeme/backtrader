@@ -30,7 +30,7 @@ from ..trade import Trade
 
 
 class Trades(Observer):
-    '''This observer keeps track of full trades and plot the PnL level achieved
+    """This observer keeps track of full trades and plot the PnL level achieved
     when a trade is closed.
 
     A trade is open when a position goes from 0 (or crossing over 0) to X and
@@ -42,7 +42,7 @@ class Trades(Observer):
 
         Show net/profit and loss, i.e.: after commission. If set to ``False``
         if will show the result of trades before commission
-    '''
+    """
     _stclock = True
 
     lines = ('pnlplus', 'pnlminus')

@@ -27,7 +27,7 @@ from . import Indicator
 
 
 class MovingAverage(object):
-    '''MovingAverage (alias MovAv)
+    """MovingAverage (alias MovAv)
 
     A placeholder to gather all Moving Average Types in a single place.
 
@@ -45,7 +45,7 @@ class MovingAverage(object):
 
       sma = MovAv.MovingAverageSimple(self.data, period)
 
-    '''
+    """
     _movavs = []
 
     @classmethod

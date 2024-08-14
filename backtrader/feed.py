@@ -42,9 +42,9 @@ class MetaAbstractDataBase(dataseries.OHLCDateTime.__class__):
     _indcol = dict()
 
     def __init__(cls, name, bases, dct):
-        '''
+        """
         Class has already been created ... register subclasses
-        '''
+        """
         # Initialize the class
         super(MetaAbstractDataBase, cls).__init__(name, bases, dct)
 
@@ -209,7 +209,7 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
         return self._tmoffset
 
     def _getnexteos(self):
-        '''Returns the next eos using a trading calendar if available'''
+        """Returns the next eos using a trading calendar if available"""
         if self._clone:
             return self.data._getnexteos()
 
@@ -235,12 +235,12 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
         return nexteos, nextdteos
 
     def _gettzinput(self):
-        '''Can be overriden by classes to return a timezone for input'''
+        """Can be overriden by classes to return a timezone for input"""
         return tzparse(self.p.tzinput)
 
     def _gettz(self):
-        '''To be overriden by subclasses which may auto-calculate the
-        timezone'''
+        """To be overriden by subclasses which may auto-calculate the
+        timezone"""
         return tzparse(self.p.tz)
 
     def date2num(self, dt):
@@ -266,19 +266,19 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
         self._qcheck = qwait
 
     def islive(self):
-        '''If this returns True, ``Cerebro`` will deactivate ``preload`` and
+        """If this returns True, ``Cerebro`` will deactivate ``preload`` and
         ``runonce`` because a live data source must be fetched tick by tick (or
-        bar by bar)'''
+        bar by bar)"""
         return False
 
     def put_notification(self, status, *args, **kwargs):
-        '''Add arguments to notification queue'''
+        """Add arguments to notification queue"""
         if self._laststatus != status:
             self.notifs.append((status, args, kwargs))
             self._laststatus = status
 
     def get_notifications(self):
-        '''Return the pending "store" notifications'''
+        """Return the pending "store" notifications"""
         # The background thread could keep on adding notifications. The None
         # mark allows to identify which is the last notification to deliver
         self.notifs.append(None)  # put a mark
@@ -317,7 +317,7 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
         return d
 
     def setenvironment(self, env):
-        '''Keep a reference to the environment'''
+        """Keep a reference to the environment"""
         self._env = env
 
     def getenvironment(self):
@@ -339,8 +339,8 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
             self._filters.append((p, args, kwargs))
 
     def compensate(self, other):
-        '''Call it to let the broker know that actions on this asset will
-        compensate open positions in another'''
+        """Call it to let the broker know that actions on this asset will
+        compensate open positions in another"""
 
         self._compensate = other
 
@@ -539,17 +539,17 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
         return False
 
     def _add2stack(self, bar, stash=False):
-        '''Saves given bar (list of values) to the stack for later retrieval'''
+        """Saves given bar (list of values) to the stack for later retrieval"""
         if not stash:
             self._barstack.append(bar)
         else:
             self._barstash.append(bar)
 
     def _save2stack(self, erase=False, force=False, stash=False):
-        '''Saves current bar to the bar stack for later retrieval
+        """Saves current bar to the bar stack for later retrieval
 
         Parameter ``erase`` determines removal from the data stream
-        '''
+        """
         bar = [line[0] for line in self.itersize()]
         if not stash:
             self._barstack.append(bar)
@@ -560,10 +560,10 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
             self.backwards(force=force)
 
     def _updatebar(self, bar, forward=False, ago=0):
-        '''Load a value from the stack onto the lines to form the new bar
+        """Load a value from the stack onto the lines to form the new bar
 
         Returns True if values are present, False otherwise
-        '''
+        """
         if forward:
             self.forward()
 
@@ -571,10 +571,10 @@ class AbstractDataBase(with_metaclass(MetaAbstractDataBase,
             line[0 + ago] = val
 
     def _fromstack(self, forward=False, stash=False):
-        '''Load a value from the stack onto the lines to form the new bar
+        """Load a value from the stack onto the lines to form the new bar
 
         Returns True if values are present, False otherwise
-        '''
+        """
 
         coll = self._barstack if not stash else self._barstash
 
@@ -647,7 +647,7 @@ class MetaCSVDataBase(DataBase.__class__):
 
 
 class CSVDataBase(with_metaclass(MetaCSVDataBase, DataBase)):
-    '''
+    """
     Base class for classes implementing CSV DataFeeds
 
     The class takes care of opening the file, reading the lines and
@@ -659,7 +659,7 @@ class CSVDataBase(with_metaclass(MetaCSVDataBase, DataBase)):
 
     The return value of ``_loadline`` (True/False) will be the return value
     of ``_load`` which has been overriden by this base class
-    '''
+    """
 
     f = None
     params = (('headers', True), ('separator', ','),)

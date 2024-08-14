@@ -28,7 +28,7 @@ import backtrader.feed as feed
 
 
 class PandasDirectData(feed.DataBase):
-    '''
+    """
     Uses a Pandas DataFrame as the feed source, iterating directly over the
     tuples returned by "itertuples".
 
@@ -42,7 +42,7 @@ class PandasDirectData(feed.DataBase):
       - A negative value in any of the parameters for the Data lines
         indicates it's not present in the DataFrame
         it is
-    '''
+    """
 
     params = (
         ('datetime', 0),
@@ -105,7 +105,7 @@ class PandasDirectData(feed.DataBase):
 
 
 class PandasData(feed.DataBase):
-    '''
+    """
     Uses a Pandas DataFrame as the feed source, using indices into column
     names (which can be "numeric")
 
@@ -131,7 +131,7 @@ class PandasData(feed.DataBase):
         - None: column not present
         - -1: autodetect
         - >= 0 or string: specific colum identifier
-    '''
+    """
 
     params = (
         ('nocase', True),

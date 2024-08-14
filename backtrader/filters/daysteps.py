@@ -23,7 +23,7 @@ from __future__ import (absolute_import, division, print_function,
 
 
 class BarReplayer_Open(object):
-    '''
+    """
     This filters splits a bar in two parts:
 
       - ``Open``: the opening price of the bar will be used to deliver an
@@ -35,7 +35,7 @@ class BarReplayer_Open(object):
         ``volume``/``openinterest``
 
     The split simulates a replay without the need to use the *replay* filter.
-    '''
+    """
     def __init__(self, data):
         self.pendingbar = None
         data.resampling = 1
@@ -68,9 +68,9 @@ class BarReplayer_Open(object):
         return ret  # the length of the stream was not changed
 
     def last(self, data):
-        '''Called when the data is no longer producing bars
+        """Called when the data is no longer producing bars
         Can be called multiple times. It has the chance to (for example)
-        produce extra bars'''
+        produce extra bars"""
         if self.pendingbar is not None:
             data.backwards()  # remove delivered open bar
             data._add2stack(self.pendingbar)  # add remaining

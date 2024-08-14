@@ -34,7 +34,7 @@ __all__ = ['BackBroker', 'BrokerBack']
 
 
 class BackBroker(bt.BrokerBase):
-    '''Broker Simulator
+    """Broker Simulator
 
       The simulation supports different order types, checking a submitted order
       cash requirements against current cash, keeping track of cash and value
@@ -220,7 +220,7 @@ class BackBroker(bt.BrokerBase):
           automatically calculate returns based on the fund value and not on
           the total net asset value
 
-    '''
+    """
     params = (
         ('cash', 10000.0),
         ('checksubmit', True),
@@ -289,44 +289,44 @@ class BackBroker(bt.BrokerBase):
         return None
 
     def set_fundmode(self, fundmode, fundstartval=None):
-        '''Set the actual fundmode (True or False)
+        """Set the actual fundmode (True or False)
 
         If the argument fundstartval is not ``None``, it will used
-        '''
+        """
         self.p.fundmode = fundmode
         if fundstartval is not None:
             self.set_fundstartval(fundstartval)
 
     def get_fundmode(self):
-        '''Returns the actual fundmode (True or False)'''
+        """Returns the actual fundmode (True or False)"""
         return self.p.fundmode
 
     fundmode = property(get_fundmode, set_fundmode)
 
     def set_fundstartval(self, fundstartval):
-        '''Set the starting value of the fund-like performance tracker'''
+        """Set the starting value of the fund-like performance tracker"""
         self.p.fundstartval = fundstartval
 
     def set_int2pnl(self, int2pnl):
-        '''Configure assignment of interest to profit and loss'''
+        """Configure assignment of interest to profit and loss"""
         self.p.int2pnl = int2pnl
 
     def set_coc(self, coc):
-        '''Configure the Cheat-On-Close method to buy the close on order bar'''
+        """Configure the Cheat-On-Close method to buy the close on order bar"""
         self.p.coc = coc
 
     def set_coo(self, coo):
-        '''Configure the Cheat-On-Open method to buy the close on order bar'''
+        """Configure the Cheat-On-Open method to buy the close on order bar"""
         self.p.coo = coo
 
     def set_shortcash(self, shortcash):
-        '''Configure the shortcash parameters'''
+        """Configure the shortcash parameters"""
         self.p.shortcash = shortcash
 
     def set_slippage_perc(self, perc,
                           slip_open=True, slip_limit=True,
                           slip_match=True, slip_out=False):
-        '''Configure slippage to be percentage based'''
+        """Configure slippage to be percentage based"""
         self.p.slip_perc = perc
         self.p.slip_fixed = 0.0
         self.p.slip_open = slip_open
@@ -337,7 +337,7 @@ class BackBroker(bt.BrokerBase):
     def set_slippage_fixed(self, fixed,
                            slip_open=True, slip_limit=True,
                            slip_match=True, slip_out=False):
-        '''Configure slippage to be fixed points based'''
+        """Configure slippage to be fixed points based"""
         self.p.slip_perc = 0.0
         self.p.slip_fixed = fixed
         self.p.slip_open = slip_open
@@ -346,44 +346,44 @@ class BackBroker(bt.BrokerBase):
         self.p.slip_out = slip_out
 
     def set_filler(self, filler):
-        '''Sets a volume filler for volume filling execution'''
+        """Sets a volume filler for volume filling execution"""
         self.p.filler = filler
 
     def set_checksubmit(self, checksubmit):
-        '''Sets the checksubmit parameter'''
+        """Sets the checksubmit parameter"""
         self.p.checksubmit = checksubmit
 
     def set_eosbar(self, eosbar):
-        '''Sets the eosbar parameter (alias: ``seteosbar``'''
+        """Sets the eosbar parameter (alias: ``seteosbar``"""
         self.p.eosbar = eosbar
 
     seteosbar = set_eosbar
 
     def get_cash(self):
-        '''Returns the current cash (alias: ``getcash``)'''
+        """Returns the current cash (alias: ``getcash``)"""
         return self.cash
 
     getcash = get_cash
 
     def set_cash(self, cash):
-        '''Sets the cash parameter (alias: ``setcash``)'''
+        """Sets the cash parameter (alias: ``setcash``)"""
         self.startingcash = self.cash = self.p.cash = cash
         self._value = cash
 
     setcash = set_cash
 
     def add_cash(self, cash):
-        '''Add/Remove cash to the system (use a negative value to remove)'''
+        """Add/Remove cash to the system (use a negative value to remove)"""
         self._cash_addition.append(cash)
 
     def get_fundshares(self):
-        '''Returns the current number of shares in the fund-like mode'''
+        """Returns the current number of shares in the fund-like mode"""
         return self._fundshares
 
     fundshares = property(get_fundshares)
 
     def get_fundvalue(self):
-        '''Returns the Fund-like share value'''
+        """Returns the Fund-like share value"""
         return self._fundval
 
     fundvalue = property(get_fundvalue)
@@ -403,9 +403,9 @@ class BackBroker(bt.BrokerBase):
         return True
 
     def get_value(self, datas=None, mkt=False, lever=False):
-        '''Returns the portfolio value of the given datas (if datas is ``None``, then
+        """Returns the portfolio value of the given datas (if datas is ``None``, then
         the total portfolio value will be returned (alias: ``getvalue``)
-        '''
+        """
         if datas is None:
             if mkt:
                 return self._valuemkt if not lever else self._valuemktlever
@@ -490,13 +490,13 @@ class BackBroker(bt.BrokerBase):
         return self._leverage
 
     def get_orders_open(self, safe=False):
-        '''Returns an iterable with the orders which are still open (either not
+        """Returns an iterable with the orders which are still open (either not
         executed or partially executed
 
         The orders returned must not be touched.
 
         If order manipulation is needed, set the parameter ``safe`` to True
-        '''
+        """
         if safe:
             os = [x.clone() for x in self.pending]
         else:
@@ -505,8 +505,8 @@ class BackBroker(bt.BrokerBase):
         return os
 
     def getposition(self, data):
-        '''Returns the current position status (a ``Position`` instance) for
-        the given ``data``'''
+        """Returns the current position status (a ``Position`` instance) for
+        the given ``data``"""
         return self.positions[data]
 
     def orderstatus(self, order):

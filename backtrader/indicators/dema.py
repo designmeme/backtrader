@@ -26,7 +26,7 @@ from . import Indicator, MovingAverageBase, MovAv
 
 
 class DoubleExponentialMovingAverage(MovingAverageBase):
-    '''
+    """
     DEMA was first time introduced in 1994, in the article "Smoothing Data with
     Faster Moving Averages" by Patrick G. Mulloy in "Technical Analysis of
     Stocks & Commodities" magazine.
@@ -38,7 +38,7 @@ class DoubleExponentialMovingAverage(MovingAverageBase):
 
     See:
       (None)
-    '''
+    """
     alias = ('DEMA', 'MovingAverageDoubleExponential',)
 
     lines = ('dema',)
@@ -53,7 +53,7 @@ class DoubleExponentialMovingAverage(MovingAverageBase):
 
 
 class TripleExponentialMovingAverage(MovingAverageBase):
-    '''
+    """
     TEMA was first time introduced in 1994, in the article "Smoothing Data with
     Faster Moving Averages" by Patrick G. Mulloy in "Technical Analysis of
     Stocks & Commodities" magazine.
@@ -68,7 +68,7 @@ class TripleExponentialMovingAverage(MovingAverageBase):
 
     See:
       (None)
-    '''
+    """
     alias = ('TEMA', 'MovingAverageTripleExponential',)
 
     lines = ('tema',)

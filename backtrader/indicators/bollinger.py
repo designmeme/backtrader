@@ -25,7 +25,7 @@ from . import Indicator, MovAv, StdDev
 
 
 class BollingerBands(Indicator):
-    '''
+    """
     Defined by John Bollinger in the 80s. It measures volatility by defining
     upper and lower bands at distance x standard deviations
 
@@ -36,7 +36,7 @@ class BollingerBands(Indicator):
 
     See:
       - http://en.wikipedia.org/wiki/Bollinger_Bands
-    '''
+    """
     alias = ('BBands',)
 
     lines = ('mid', 'top', 'bot',)
@@ -65,9 +65,9 @@ class BollingerBands(Indicator):
 
 
 class BollingerBandsPct(BollingerBands):
-    '''
+    """
     Extends the Bollinger Bands with a Percentage line
-    '''
+    """
     lines = ('pctb',)
     plotlines = dict(pctb=dict(_name='%B'))  # display the line as %B on chart
 

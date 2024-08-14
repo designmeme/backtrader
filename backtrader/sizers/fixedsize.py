@@ -25,7 +25,7 @@ import backtrader as bt
 
 
 class FixedSize(bt.Sizer):
-    '''
+    """
     This sizer simply returns a fixed size for any operation.
     Size can be controlled by number of tranches that a system
     wishes to use to scale into trades by specifying the ``tranches``
@@ -35,7 +35,7 @@ class FixedSize(bt.Sizer):
     Params:
       - ``stake`` (default: ``1``)
       - ``tranches`` (default: ``1``)
-    '''
+    """
 
     params = (('stake', 1),
               ('tranches', 1))
@@ -57,7 +57,7 @@ SizerFix = FixedSize
 
 
 class FixedReverser(bt.Sizer):
-    '''This sizer returns the needes fixed size to reverse an open position or
+    """This sizer returns the needes fixed size to reverse an open position or
     the fixed size to open one
 
       - To open a position: return the param ``stake``
@@ -66,7 +66,7 @@ class FixedReverser(bt.Sizer):
 
     Params:
       - ``stake`` (default: ``1``)
-    '''
+    """
     params = (('stake', 1),)
 
     def _getsizing(self, comminfo, cash, data, isbuy):
@@ -76,7 +76,7 @@ class FixedReverser(bt.Sizer):
 
 
 class FixedSizeTarget(bt.Sizer):
-    '''
+    """
     This sizer simply returns a fixed target size, useful when coupled
     with Target Orders and specifically ``cerebro.target_order_size()``.
     Size can be controlled by number of tranches that a system
@@ -87,7 +87,7 @@ class FixedSizeTarget(bt.Sizer):
     Params:
       - ``stake`` (default: ``1``)
       - ``tranches`` (default: ``1``)
-    '''
+    """
 
     params = (('stake', 1),
               ('tranches', 1))

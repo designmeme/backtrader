@@ -25,7 +25,7 @@ from . import Indicator, And, If, MovAv, ATR
 
 
 class UpMove(Indicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"* as part of the Directional Move System to
     calculate Directional Indicators.
@@ -37,7 +37,7 @@ class UpMove(Indicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     lines = ('upmove',)
 
     def __init__(self):
@@ -46,7 +46,7 @@ class UpMove(Indicator):
 
 
 class DownMove(Indicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"* as part of the Directional Move System to
     calculate Directional Indicators.
@@ -58,7 +58,7 @@ class DownMove(Indicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     lines = ('downmove',)
 
     def __init__(self):
@@ -67,7 +67,7 @@ class DownMove(Indicator):
 
 
 class _DirectionalIndicator(Indicator):
-    '''
+    """
     This class serves as the root base class for all "Directional Movement
     System" related indicators, given that the calculations are first common
     and then derived from the common calculations.
@@ -75,7 +75,7 @@ class _DirectionalIndicator(Indicator):
     It can calculate the +DI and -DI values (using kwargs as the hint as to
     what to calculate) but doesn't assign them to lines. This is left for
     sublcases of this class.
-    '''
+    """
     params = (('period', 14), ('movav', MovAv.Smoothed))
 
     plotlines = dict(plusDI=dict(_name='+DI'), minusDI=dict(_name='-DI'))
@@ -109,7 +109,7 @@ class _DirectionalIndicator(Indicator):
 
 
 class DirectionalIndicator(_DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -136,7 +136,7 @@ class DirectionalIndicator(_DirectionalIndicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = ('DI',)
     lines = ('plusDI', 'minusDI',)
 
@@ -148,7 +148,7 @@ class DirectionalIndicator(_DirectionalIndicator):
 
 
 class PlusDirectionalIndicator(_DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -173,7 +173,7 @@ class PlusDirectionalIndicator(_DirectionalIndicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = (('PlusDI', '+DI'),)
     lines = ('plusDI',)
 
@@ -186,7 +186,7 @@ class PlusDirectionalIndicator(_DirectionalIndicator):
 
 
 class MinusDirectionalIndicator(_DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -211,7 +211,7 @@ class MinusDirectionalIndicator(_DirectionalIndicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = (('MinusDI', '-DI'),)
     lines = ('minusDI',)
 
@@ -224,7 +224,7 @@ class MinusDirectionalIndicator(_DirectionalIndicator):
 
 
 class AverageDirectionalMovementIndex(_DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -253,7 +253,7 @@ class AverageDirectionalMovementIndex(_DirectionalIndicator):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = ('ADX',)
 
     lines = ('adx',)
@@ -268,7 +268,7 @@ class AverageDirectionalMovementIndex(_DirectionalIndicator):
 
 
 class AverageDirectionalMovementIndexRating(AverageDirectionalMovementIndex):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -300,7 +300,7 @@ class AverageDirectionalMovementIndexRating(AverageDirectionalMovementIndex):
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = ('ADXR',)
 
     lines = ('adxr',)
@@ -314,7 +314,7 @@ class AverageDirectionalMovementIndexRating(AverageDirectionalMovementIndex):
 
 class DirectionalMovementIndex(AverageDirectionalMovementIndex,
                                DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -343,13 +343,13 @@ class DirectionalMovementIndex(AverageDirectionalMovementIndex,
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = ('DMI',)
 
 
 class DirectionalMovement(AverageDirectionalMovementIndexRating,
                           DirectionalIndicator):
-    '''
+    """
     Defined by J. Welles Wilder, Jr. in 1978 in his book *"New Concepts in
     Technical Trading Systems"*.
 
@@ -379,5 +379,5 @@ class DirectionalMovement(AverageDirectionalMovementIndexRating,
 
     See:
       - https://en.wikipedia.org/wiki/Average_directional_movement_index
-    '''
+    """
     alias = ('DM',)

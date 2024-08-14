@@ -31,7 +31,7 @@ from backtrader.analyzers import TimeReturn, AnnualReturn
 
 
 class SharpeRatio(Analyzer):
-    '''This analyzer calculates the SharpeRatio of a strategy using a risk free
+    """This analyzer calculates the SharpeRatio of a strategy using a risk free
     asset which is simply an interest rate
 
     See also:
@@ -108,7 +108,7 @@ class SharpeRatio(Analyzer):
 
         Returns a dictionary with key "sharperatio" holding the ratio
 
-    '''
+    """
     params = (
         ('timeframe', TimeFrame.Years),
         ('compression', 1),
@@ -207,14 +207,14 @@ class SharpeRatio(Analyzer):
 
 
 class SharpeRatio_A(SharpeRatio):
-    '''Extension of the SharpeRatio which returns the Sharpe Ratio directly in
+    """Extension of the SharpeRatio which returns the Sharpe Ratio directly in
     annualized form
 
     The following param has been changed from ``SharpeRatio``
 
       - ``annualize`` (default: ``True``)
 
-    '''
+    """
 
     params = (
         ('annualize', True),

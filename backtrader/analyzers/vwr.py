@@ -30,7 +30,7 @@ from ..mathsupport import standarddev
 
 
 class VWR(TimeFrameAnalyzerBase):
-    '''Variability-Weighted Return: Better SharpeRatio with Log Returns
+    """Variability-Weighted Return: Better SharpeRatio with Log Returns
 
     Alias:
 
@@ -95,7 +95,7 @@ class VWR(TimeFrameAnalyzerBase):
         The returned dict contains the following keys:
 
           - ``vwr``: Variability-Weighted Return
-    '''
+    """
 
     params = (
         ('tann', None),

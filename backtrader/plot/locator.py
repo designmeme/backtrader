@@ -21,10 +21,10 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-'''
+"""
 Redefine/Override matplotlib locators to make them work with index base x axis
 which can be converted from/to dates
-'''
+"""
 
 import datetime
 import warnings
@@ -245,7 +245,7 @@ class AutoDateFormatter(ADFormatter):
         super(AutoDateFormatter, self).__init__(locator, tz, defaultfmt)
 
     def __call__(self, x, pos=None):
-        '''Return the label for time x at position pos'''
+        """Return the label for time x at position pos"""
         x = int(round(x))
         ldates = len(self._dates)
         if x >= ldates:

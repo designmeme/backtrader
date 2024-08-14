@@ -29,7 +29,7 @@ import backtrader.indicators as btind
 
 
 class DayStepsCloseFilter(bt.with_metaclass(bt.MetaParams, object)):
-    '''
+    """
     Replays a bar in 2 steps:
 
       - In the 1st step the "Open-High-Low" could be evaluated to decide if to
@@ -44,7 +44,7 @@ class DayStepsCloseFilter(bt.with_metaclass(bt.MetaParams, object)):
       and
 
       - Open-High-Low-Close
-    '''
+    """
     params = (
         ('cvol', 0.5),  # 0 -> 1 amount of volume to keep for close
     )
@@ -80,9 +80,9 @@ class DayStepsCloseFilter(bt.with_metaclass(bt.MetaParams, object)):
         return False  # the length of the stream was not changed
 
     def last(self, data):
-        '''Called when the data is no longer producing bars
+        """Called when the data is no longer producing bars
         Can be called multiple times. It has the chance to (for example)
-        produce extra bars'''
+        produce extra bars"""
         if self.pendingbar is not None:
             data.backwards()  # remove delivered open bar
             data._add2stack(self.pendingbar)  # add remaining
@@ -93,7 +93,7 @@ class DayStepsCloseFilter(bt.with_metaclass(bt.MetaParams, object)):
 
 
 class DayStepsReplayFilter(bt.with_metaclass(bt.MetaParams, object)):
-    '''
+    """
     Replays a bar in 2 steps:
 
       - In the 1st step the "Open-High-Low" could be evaluated to decide if to
@@ -108,7 +108,7 @@ class DayStepsReplayFilter(bt.with_metaclass(bt.MetaParams, object)):
       and
 
       - Open-High-Low-Close
-    '''
+    """
     params = (
         ('closevol', 0.5),  # 0 -> 1 amount of volume to keep for close
     )

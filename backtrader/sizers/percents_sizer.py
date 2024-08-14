@@ -27,11 +27,11 @@ __all__ = ['PercentSizer', 'AllInSizer', 'PercentSizerInt', 'AllInSizerInt']
 
 
 class PercentSizer(bt.Sizer):
-    '''This sizer return percents of available cash
+    """This sizer return percents of available cash
 
     Params:
       - ``percents`` (default: ``20``)
-    '''
+    """
 
     params = (
         ('percents', 20),
@@ -55,23 +55,23 @@ class PercentSizer(bt.Sizer):
 
 
 class AllInSizer(PercentSizer):
-    '''This sizer return all available cash of broker
+    """This sizer return all available cash of broker
 
      Params:
        - ``percents`` (default: ``100``)
-     '''
+     """
     params = (
         ('percents', 100),
     )
 
 
 class PercentSizerInt(PercentSizer):
-    '''This sizer return percents of available cash in form of size truncated
+    """This sizer return percents of available cash in form of size truncated
     to an int
 
     Params:
       - ``percents`` (default: ``20``)
-    '''
+    """
 
     params = (
         ('retint', True),  # return an int size or rather the float value
@@ -79,12 +79,12 @@ class PercentSizerInt(PercentSizer):
 
 
 class AllInSizerInt(PercentSizerInt):
-    '''This sizer return all available cash of broker with the
+    """This sizer return all available cash of broker with the
     size truncated to an int
 
      Params:
        - ``percents`` (default: ``100``)
-     '''
+     """
     params = (
         ('percents', 100),
     )

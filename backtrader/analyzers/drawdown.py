@@ -29,7 +29,7 @@ __all__ = ['DrawDown', 'TimeDrawDown']
 
 
 class DrawDown(bt.Analyzer):
-    '''This analyzer calculates trading system drawdowns stats such as drawdown
+    """This analyzer calculates trading system drawdowns stats such as drawdown
     values in %s and in dollars, max drawdown in %s and in dollars, drawdown
     length and drawdown max length
 
@@ -58,7 +58,7 @@ class DrawDown(bt.Analyzer):
         - ``max.drawdown`` - max drawdown value in 0.xx %
         - ``max.moneydown`` - max drawdown value in monetary units
         - ``max.len`` - max drawdown length
-    '''
+    """
 
     params = (
         ('fund', None),
@@ -111,7 +111,7 @@ class DrawDown(bt.Analyzer):
 
 
 class TimeDrawDown(bt.TimeFrameAnalyzerBase):
-    '''This analyzer calculates trading system drawdowns on the chosen
+    """This analyzer calculates trading system drawdowns on the chosen
     timeframe which can be different from the one used in the underlying data
     Params:
 
@@ -155,7 +155,7 @@ class TimeDrawDown(bt.TimeFrameAnalyzerBase):
         - ``dd``
         - ``maxdd``
         - ``maxddlen``
-    '''
+    """
 
     params = (
         ('fund', None),

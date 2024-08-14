@@ -65,9 +65,9 @@ class MetaIndicator(IndicatorBase.__class__):
         return cls._icache.setdefault(ckey, _obj)
 
     def __init__(cls, name, bases, dct):
-        '''
+        """
         Class has already been created ... register subclasses
-        '''
+        """
         # Initialize the class
         super(MetaIndicator, cls).__init__(name, bases, dct)
 

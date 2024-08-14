@@ -29,7 +29,7 @@ __all__ = ['Calmar']
 
 
 class Calmar(bt.TimeFrameAnalyzerBase):
-    '''This analyzer calculates the CalmarRatio
+    """This analyzer calculates the CalmarRatio
     timeframe which can be different from the one used in the underlying data
     Params:
 
@@ -70,7 +70,7 @@ class Calmar(bt.TimeFrameAnalyzerBase):
 
     Attributes:
       - ``calmar`` the latest calculated calmar ratio
-    '''
+    """
 
     packages = ('collections', 'math',)
 

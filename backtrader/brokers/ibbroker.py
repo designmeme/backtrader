@@ -66,7 +66,7 @@ class IBOrderState(object):
 
 
 class IBOrder(OrderBase, ib.ext.Order.Order):
-    '''Subclasses the IBPy order to provide the minimum extra functionality
+    """Subclasses the IBPy order to provide the minimum extra functionality
     needed to be compatible with the internally defined orders
 
     Once ``OrderBase`` has processed the parameters, the __init__ method takes
@@ -88,11 +88,11 @@ class IBOrder(OrderBase, ib.ext.Order.Order):
 
     This would be done almost always from the ``Buy`` and ``Sell`` methods of
     the ``Strategy`` subclass being used in ``Cerebro``
-    '''
+    """
 
     def __str__(self):
-        '''Get the printout from the base class and add some ib.Order specific
-        fields'''
+        """Get the printout from the base class and add some ib.Order specific
+        fields"""
         basetxt = super(IBOrder, self).__str__()
         tojoin = [basetxt]
         tojoin.append('Ref: {}'.format(self.ref))
@@ -206,7 +206,7 @@ class IBOrder(OrderBase, ib.ext.Order.Order):
 
 
 class IBCommInfo(CommInfoBase):
-    '''
+    """
     Commissions are calculated by ib, but the trades calculations in the
     ```Strategy`` rely on the order carrying a CommInfo object attached for the
     calculation of the operation cost and value.
@@ -217,28 +217,28 @@ class IBCommInfo(CommInfoBase):
 
     The margin calculation is not a known in advance information with IB
     (margin impact can be gotten from OrderState objects) and therefore it is
-    left as future exercise to get it'''
+    left as future exercise to get it"""
 
     def getvaluesize(self, size, price):
         # In real life the margin approaches the price
         return abs(size) * price
 
     def getoperationcost(self, size, price):
-        '''Returns the needed amount of cash an operation would cost'''
+        """Returns the needed amount of cash an operation would cost"""
         # Same reasoning as above
         return abs(size) * price
 
 
 class MetaIBBroker(BrokerBase.__class__):
     def __init__(cls, name, bases, dct):
-        '''Class has already been created ... register'''
+        """Class has already been created ... register"""
         # Initialize the class
         super(MetaIBBroker, cls).__init__(name, bases, dct)
         ibstore.IBStore.BrokerCls = cls
 
 
 class IBBroker(with_metaclass(MetaIBBroker, BrokerBase)):
-    '''Broker implementation for Interactive Brokers.
+    """Broker implementation for Interactive Brokers.
 
     This class maps the orders/positions from Interactive Brokers to the
     internal API of ``backtrader``.
@@ -259,7 +259,7 @@ class IBBroker(with_metaclass(MetaIBBroker, BrokerBase)):
         management which would also allow tradeid with multiple ids (profit and
         loss would also be calculated locally), but could be considered to be
         defeating the purpose of working with a live broker
-    '''
+    """
     params = ()
 
     def __init__(self, **kwargs):

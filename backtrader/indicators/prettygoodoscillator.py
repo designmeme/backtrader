@@ -26,7 +26,7 @@ from . import Indicator, MovAv, ATR
 
 
 class PrettyGoodOscillator(Indicator):
-    '''
+    """
     The "Pretty Good Oscillator" (PGO) by Mark Johnson measures the distance of
     the current close from its simple moving average of period
     Average), expressed in terms of an average true range (see Average True
@@ -46,7 +46,7 @@ class PrettyGoodOscillator(Indicator):
     See also:
       - http://user42.tuxfamily.org/chart/manual/Pretty-Good-Oscillator.html
 
-    '''
+    """
     alias = ('PGO', 'PrettyGoodOsc',)
     lines = ('pgo',)
 

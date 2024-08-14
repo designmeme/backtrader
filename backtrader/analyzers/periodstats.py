@@ -32,7 +32,7 @@ __all__ = ['PeriodStats']
 
 
 class PeriodStats(bt.Analyzer):
-    '''Calculates basic statistics for given timeframe
+    """Calculates basic statistics for given timeframe
 
     Params:
 
@@ -73,7 +73,7 @@ class PeriodStats(bt.Analyzer):
 
     If the parameter ``zeroispos`` is set to ``True``, periods with no change
     will be counted as positive
-    '''
+    """
 
     params = (
         ('timeframe', bt.TimeFrame.Years),

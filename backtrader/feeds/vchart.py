@@ -31,7 +31,7 @@ from ..utils import date2num
 
 
 class VChartData(feed.DataBase):
-    '''
+    """
     Support for `Visual Chart <www.visualchart.com>`_ binary on-disk files for
     both daily and intradaily formats.
 
@@ -44,7 +44,7 @@ class VChartData(feed.DataBase):
 
         Else the file extension (``.fd`` for daily and ``.min`` for intraday)
         will be used.
-    '''
+    """
 
     def start(self):
         super(VChartData, self).start()

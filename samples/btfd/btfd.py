@@ -32,7 +32,7 @@ import backtrader as bt
 
 
 class ValueUnlever(bt.observers.Value):
-    '''Extension of regular Value observer to add leveraged view'''
+    """Extension of regular Value observer to add leveraged view"""
     lines = ('value_lever', 'asset')
     params = (('assetstart', 100000.0), ('lever', True),)
 

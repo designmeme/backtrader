@@ -26,7 +26,7 @@ from . import Highest, Lowest
 
 
 class Ichimoku(bt.Indicator):
-    '''
+    """
     Developed and published in his book in 1969 by journalist Goichi Hosoda
 
     Formula:
@@ -47,7 +47,7 @@ class Ichimoku(bt.Indicator):
     See:
       - http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:ichimoku_cloud
 
-    '''
+    """
     lines = ('tenkan_sen', 'kijun_sen',
              'senkou_span_a', 'senkou_span_b', 'chikou_span',)
     params = (

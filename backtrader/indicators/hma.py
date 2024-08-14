@@ -27,7 +27,7 @@ from . import MovingAverageBase, MovAv
 
 # Inherits from MovingAverageBase to auto-register as MovingAverage type
 class HullMovingAverage(MovingAverageBase):
-    '''By Alan Hull
+    """By Alan Hull
 
     The Hull Moving Average solves the age old dilemma of making a moving
     average more responsive to current price activity whilst maintaining curve
@@ -48,7 +48,7 @@ class HullMovingAverage(MovingAverageBase):
 
         In the default case of ``30`` the final minimum period before the
         moving average produces a non-NAN value is ``34``
-    '''
+    """
     alias = ('HMA', 'HullMA',)
     lines = ('hma',)
 

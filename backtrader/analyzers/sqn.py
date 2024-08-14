@@ -29,7 +29,7 @@ from backtrader.utils import AutoOrderedDict
 
 
 class SQN(Analyzer):
-    '''SQN or SystemQualityNumber. Defined by Van K. Tharp to categorize trading
+    """SQN or SystemQualityNumber. Defined by Van K. Tharp to categorize trading
     systems.
 
       - 1.6 - 1.9 Below average
@@ -52,12 +52,12 @@ class SQN(Analyzer):
         Returns a dictionary with keys "sqn" and "trades" (number of
         considered trades)
 
-    '''
+    """
     alias = ('SystemQualityNumber',)
 
     def create_analysis(self):
-        '''Replace default implementation to instantiate an AutoOrdereDict
-        rather than an OrderedDict'''
+        """Replace default implementation to instantiate an AutoOrdereDict
+        rather than an OrderedDict"""
         self.rets = AutoOrderedDict()
 
     def start(self):

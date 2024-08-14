@@ -30,7 +30,7 @@ import backtrader as bt
 
 
 class TheStrategy(bt.Strategy):
-    '''
+    """
     This strategy is capable of:
 
       - Going Long with a Moving Average upwards CrossOver
@@ -39,7 +39,7 @@ class TheStrategy(bt.Strategy):
 
       - Closing the aforementioned longs with the corresponding downwards
         crossovers
-    '''
+    """
 
     params = (
         ('myname', None),
@@ -122,10 +122,10 @@ class TheStrategy(bt.Strategy):
 
 
 class TheStrategy2(TheStrategy):
-    '''
+    """
     Subclass of TheStrategy to simply change the parameters
 
-    '''
+    """
     params = (
         ('stake', 200),
         ('macd1', 15),

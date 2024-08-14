@@ -25,7 +25,7 @@ import backtrader as bt
 
 
 class DataFilter(bt.AbstractDataBase):
-    '''
+    """
     This class filters out bars from a given data source. In addition to the
     standard parameters of a DataBase it takes a ``funcfilter`` parameter which
     can be any callable
@@ -38,7 +38,7 @@ class DataFilter(bt.AbstractDataBase):
 
         - Return value ``True``: current data source bar values will used
         - Return value ``False``: current data source bar values will discarded
-    '''
+    """
     params = (('funcfilter', None),)
 
     def preload(self):

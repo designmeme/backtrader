@@ -25,7 +25,7 @@ import backtrader as bt
 
 
 class GrossLeverage(bt.Analyzer):
-    '''This analyzer calculates the Gross Leverage of the current strategy
+    """This analyzer calculates the Gross Leverage of the current strategy
     on a timeframe basis
 
     Params:
@@ -45,7 +45,7 @@ class GrossLeverage(bt.Analyzer):
 
         Returns a dictionary with returns as values and the datetime points for
         each return as keys
-    '''
+    """
 
     params = (
         ('fund', None),

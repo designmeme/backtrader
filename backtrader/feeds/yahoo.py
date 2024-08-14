@@ -35,7 +35,7 @@ from ..utils import date2num
 
 
 class YahooFinanceCSVData(feed.CSVDataBase):
-    '''
+    """
     Parses pre-downloaded Yahoo CSV Data Feeds (or locally generated if they
     comply to the Yahoo format)
 
@@ -77,7 +77,7 @@ class YahooFinanceCSVData(feed.CSVDataBase):
         close* is now fixed. The parameter is retained, in case the need to
         swap the columns again arose.
 
-    '''
+    """
     lines = ('adjclose',)
 
     params = (
@@ -179,11 +179,11 @@ class YahooFinanceCSVData(feed.CSVDataBase):
 
 
 class YahooLegacyCSV(YahooFinanceCSVData):
-    '''
+    """
     This is intended to load files which were downloaded before Yahoo
     discontinued the original service in May-2017
 
-    '''
+    """
     params = (
         ('version', ''),
     )
@@ -194,7 +194,7 @@ class YahooFinanceCSV(feed.CSVFeedBase):
 
 
 class YahooFinanceData(YahooFinanceCSVData):
-    '''
+    """
     Executes a direct download of data from Yahoo servers for the given time
     range.
 
@@ -239,7 +239,7 @@ class YahooFinanceData(YahooFinanceCSVData):
         Number of times (each) to try to get a ``crumb`` cookie and download
         the data
 
-      '''
+      """
 
     params = (
         ('proxies', {}),

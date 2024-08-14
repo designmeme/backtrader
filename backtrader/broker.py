@@ -31,9 +31,9 @@ from . import fillers as filler
 
 class MetaBroker(MetaParams):
     def __init__(cls, name, bases, dct):
-        '''
+        """
         Class has already been created ... fill missing methods if needed be
-        '''
+        """
         # Initialize the class
         super(MetaBroker, cls).__init__(name, bases, dct)
         translations = {
@@ -67,16 +67,16 @@ class BrokerBase(with_metaclass(MetaBroker, object)):
         pass
 
     def add_order_history(self, orders, notify=False):
-        '''Add order history. See cerebro for details'''
+        """Add order history. See cerebro for details"""
         raise NotImplementedError
 
     def set_fund_history(self, fund):
-        '''Add fund history. See cerebro for details'''
+        """Add fund history. See cerebro for details"""
         raise NotImplementedError
 
     def getcommissioninfo(self, data):
-        '''Retrieves the ``CommissionInfo`` scheme associated with the given
-        ``data``'''
+        """Retrieves the ``CommissionInfo`` scheme associated with the given
+        ``data``"""
         if data._name in self.comminfo:
             return self.comminfo[data._name]
 
@@ -89,13 +89,13 @@ class BrokerBase(with_metaclass(MetaBroker, object)):
                       automargin=False,
                       name=None):
 
-        '''This method sets a `` CommissionInfo`` object for assets managed in
+        """This method sets a `` CommissionInfo`` object for assets managed in
         the broker with the parameters. Consult the reference for
         ``CommInfoBase``
 
         If name is ``None``, this will be the default for assets for which no
         other ``CommissionInfo`` scheme can be found
-        '''
+        """
 
         comm = CommInfoBase(commission=commission, margin=margin, mult=mult,
                             commtype=commtype, stocklike=stocklike,
@@ -105,8 +105,8 @@ class BrokerBase(with_metaclass(MetaBroker, object)):
         self.comminfo[name] = comm
 
     def addcommissioninfo(self, comminfo, name=None):
-        '''Adds a ``CommissionInfo`` object that will be the default for all assets if
-        ``name`` is ``None``'''
+        """Adds a ``CommissionInfo`` object that will be the default for all assets if
+        ``name`` is ``None``"""
         self.comminfo[name] = comminfo
 
     def getcash(self):
@@ -116,7 +116,7 @@ class BrokerBase(with_metaclass(MetaBroker, object)):
         raise NotImplementedError
 
     def get_fundshares(self):
-        '''Returns the current number of shares in the fund-like mode'''
+        """Returns the current number of shares in the fund-like mode"""
         return 1.0  # the abstract mode has only 1 share
 
     fundshares = property(get_fundshares)
@@ -127,14 +127,14 @@ class BrokerBase(with_metaclass(MetaBroker, object)):
     fundvalue = property(get_fundvalue)
 
     def set_fundmode(self, fundmode, fundstartval=None):
-        '''Set the actual fundmode (True or False)
+        """Set the actual fundmode (True or False)
 
         If the argument fundstartval is not ``None``, it will used
-        '''
+        """
         pass  # do nothing, not all brokers can support this
 
     def get_fundmode(self):
-        '''Returns the actual fundmode (True or False)'''
+        """Returns the actual fundmode (True or False)"""
         return False
 
     fundmode = property(get_fundmode, set_fundmode)

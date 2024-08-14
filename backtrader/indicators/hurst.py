@@ -28,7 +28,7 @@ __all__ = ['HurstExponent', 'Hurst']
 
 
 class HurstExponent(PeriodN):
-    '''
+    """
     References:
 
       - https://www.quantopian.com/posts/hurst-exponent
@@ -55,7 +55,7 @@ class HurstExponent(PeriodN):
     The original values (40, 2, self.p.period / 2) are kept for backwards
     compatibility
 
-    '''
+    """
     frompackages = (
         ('numpy', ('asarray', 'log10', 'polyfit', 'sqrt', 'std', 'subtract')),
     )

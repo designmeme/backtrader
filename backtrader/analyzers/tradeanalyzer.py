@@ -29,7 +29,7 @@ from backtrader.utils.py3 import MAXINT
 
 
 class TradeAnalyzer(Analyzer):
-    '''
+    """
     Provides statistics on closed trades (keeps also the count of open ones)
 
       - Total Open/Closed Trades
@@ -64,7 +64,7 @@ class TradeAnalyzer(Analyzer):
 
         - dictname['total']['total'] which will have a value of 0 (the field is
           also reachable with dot notation dictname.total.total
-    '''
+    """
     def create_analysis(self):
         self.rets = AutoOrderedDict()
         self.rets.total.total = 0
