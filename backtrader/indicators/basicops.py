@@ -25,8 +25,6 @@ import functools
 import math
 import operator
 
-import numpy as np
-
 from ..utils.py3 import map, range
 
 from . import Indicator
@@ -363,9 +361,6 @@ class Average(PeriodN):
         period = self.p.period
 
         for i in range(start, end):
-            # 상장전후 채워진 -1 데이터 제외
-            if -1 in src[i - period + 1:i + 1]:
-                continue
             dst[i] = math.fsum(src[i - period + 1:i + 1]) / period
 
 
@@ -406,8 +401,6 @@ class ExponentialSmoothing(Average):
         super(ExponentialSmoothing, self).once(start, end)
 
     def once(self, start, end):
-        # -1 제외한 prev 값을 갖기 위해 SMA 라인을 다시 만든다.
-        super(ExponentialSmoothing, self).once(start, end)
         darray = self.data.array
         larray = self.line.array
         alpha = self.alpha
@@ -416,14 +409,6 @@ class ExponentialSmoothing(Average):
         # Seed value from SMA calculated with the call to oncestart
         prev = larray[start - 1]
         for i in range(start, end):
-            # 상장전,상장폐지후 -1 데이터 제외하고 상장 데이터만 계산하기
-            if darray[i] == -1:
-                continue
-            if np.isnan(prev):
-                if not np.isnan(larray[i - 1]):
-                    prev = larray[i - 1]
-                else:
-                    continue
             larray[i] = prev = prev * alpha1 + darray[i] * alpha
 
 
