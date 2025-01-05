@@ -23,6 +23,7 @@ from __future__ import (absolute_import, division, print_function,
 
 
 import collections
+from decimal import Decimal
 
 import backtrader as bt
 from backtrader import Order, Position
@@ -95,7 +96,8 @@ class Transactions(bt.Analyzer):
             if pos is not None:
                 size, price = pos.size, pos.price
                 if size:
-                    entries.append([size, price, i, dname, -size * price])
+                    value = Decimal(str(-size)) * Decimal(str(price))
+                    entries.append([size, price, i, dname, float(value)])
 
         if entries:
             self.rets[self.strategy.datetime.datetime()] = entries
