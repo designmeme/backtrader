@@ -92,15 +92,15 @@ class TradeHistory(AutoOrderedDict):
 
 
 class Trade(object):
-    """Keeps track of the life of an trade: size, price,
+    """Keeps track of the life of a trade: size, price,
     commission (and value?)
 
-    An trade starts at 0 can be increased and reduced and can
+    A trade starts at 0 can be increased and reduced and can
     be considered closed if it goes back to 0.
 
     The trade can be long (positive size) or short (negative size)
 
-    An trade is not meant to be reversed (no support in the logic for it)
+    A trade is not meant to be reversed (no support in the logic for it)
 
     Member Attributes:
 
