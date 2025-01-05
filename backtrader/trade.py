@@ -22,6 +22,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import itertools
+from decimal import Decimal
 
 from .utils import AutoOrderedDict
 from .utils.date import num2date
@@ -40,7 +41,7 @@ class TradeHistory(AutoOrderedDict):
         - ``status`` (``int``): Trade status
         - ``dt`` (``float``): float coded datetime
         - ``barlen`` (``int``): number of bars the trade has been active
-        - ``size`` (``int``): current size of the Trade
+        - ``size`` (``float``): current size of the Trade
         - ``price`` (``float``): current price of the Trade
         - ``value`` (``float``): current monetary value of the Trade
         - ``pnl`` (``float``): current profit and loss of the Trade
@@ -108,7 +109,7 @@ class Trade(object):
       - ``status`` (``int``): one of Created, Open, Closed
       - ``tradeid``: grouping tradeid passed to orders during creation
         The default in orders is 0
-      - ``size`` (``int``): current size of the trade
+      - ``size`` (``float``): current size of the trade
       - ``price`` (``float``): current price of the trade
       - ``value`` (``float``): current value of the trade
       - ``commission`` (``float``): current accumulated commission
@@ -163,7 +164,7 @@ class Trade(object):
         )
 
     def __init__(self, data=None, tradeid=0, historyon=False,
-                 size=0, price=0.0, value=0.0, commission=0.0):
+                 size=0.0, price=0.0, value=0.0, commission=0.0):
 
         self.ref = next(self.refbasis)
         self.data = data
@@ -217,7 +218,7 @@ class Trade(object):
         """
         return self.data.num2date(self.dtclose, tz=tz, naive=naive)
 
-    def update(self, order, size, price, value, commission, pnl,
+    def update(self, order, size: float, price: float, value: float, commission: float, pnl: float,
                comminfo):
         """
         Updates the current trade. The logic does not check if the
@@ -234,7 +235,7 @@ class Trade(object):
         Args:
             order: the order object which has (completely or partially)
                 generated this update
-            size (int): amount to update the order
+            size (float): amount to update the order
                 if size has the same sign as the current trade a
                 position increase will happen
                 if size has the opposite sign as current op size a
@@ -252,12 +253,12 @@ class Trade(object):
             return  # empty update, skip all other calculations
 
         # Commission can only increase
-        self.commission += commission
+        self.commission = float(Decimal(str(self.commission)) + Decimal(str(commission)))
 
         # Update size and keep a reference for logic a calculations
         oldsize = self.size
-        self.size += size  # size will carry the opposite sign if reducing
-        self.size = round(self.size, 8)
+        # size will carry the opposite sign if reducing
+        self.size = float(Decimal(str(self.size)) + Decimal(str(size)))
 
         # Check if it has been currently opened
         self.justopened = bool(not oldsize and size)
@@ -289,16 +290,18 @@ class Trade(object):
         if abs(self.size) > abs(oldsize):
             # position increased (be it positive or negative)
             # update the average price
-            self.price = (oldsize * self.price + size * price) / self.size
-            self.price = round(self.price, 8)
+            old_value = Decimal(str(oldsize)) * Decimal(str(self.price))
+            new_value = Decimal(str(size)) * Decimal(str(price))
+            new_price = (old_value + new_value) / Decimal(str(self.size))
+            self.price = float(new_price)
             pnl = 0.0
 
         else:  # abs(self.size) < abs(oldsize)
             # position reduced/closed
             pnl = comminfo.profitandloss(-size, self.price, price)
 
-        self.pnl += pnl
-        self.pnlcomm = self.pnl - self.commission
+        self.pnl = float(Decimal(str(self.pnl)) + Decimal(str(pnl)))
+        self.pnlcomm = float(Decimal(str(self.pnl)) - Decimal(str(self.commission)))
 
         self.value = comminfo.getvaluesize(self.size, self.price)
 

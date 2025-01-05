@@ -22,6 +22,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import datetime
+from decimal import Decimal
 
 from .utils.py3 import with_metaclass
 from .metabase import MetaParams
@@ -166,7 +167,7 @@ class CommInfoBase(with_metaclass(MetaParams)):
     def stocklike(self):
         return self._stocklike
 
-    def get_margin(self, price):
+    def get_margin(self, price: float) -> float:
         """Returns the actual margin/guarantees needed for a single item of the
         asset at the given price. The default implementation has this policy:
 
@@ -180,9 +181,10 @@ class CommInfoBase(with_metaclass(MetaParams)):
             return self.p.margin
 
         elif self.p.automargin < 0:
-            return price * self.p.mult
+            return float(Decimal(str(price)) * Decimal(str(self.p.mult)))
 
-        return price * self.p.automargin  # int/float expected
+        # self.p.automargin  # int/float expected
+        return float(Decimal(str(price)) * Decimal(str(self.p.automargin)))
 
     def get_leverage(self):
 
@@ -203,28 +205,30 @@ class CommInfoBase(with_metaclass(MetaParams)):
 
         return abs(size) * price
 
-    def getvaluesize(self, size, price):
+    def getvaluesize(self, size: float, price: float) -> float:
         """Returns the value of size for given a price. For future-like
         objects it is fixed at size * margin"""
         if not self._stocklike:
-            return abs(size) * self.get_margin(price)
+            return float(Decimal(str(abs(size))) * Decimal(str(self.get_margin(price))))
 
-        return size * price
+        return float(Decimal(str(size)) * Decimal(str(price)))
 
-    def getvalue(self, position, price):
+    def getvalue(self, position, price: float) -> float:
         """Returns the value of a position given a price. For future-like
         objects it is fixed at size * margin"""
         if not self._stocklike:
-            return abs(position.size) * self.get_margin(price)
+            return float(Decimal(str(abs(position.size))) * Decimal(str(self.get_margin(price))))
 
         size = position.size
         if size >= 0:
-            return size * price
+            return float(Decimal(str(size)) * Decimal(str(price)))
 
         # With stocks, a short position is worth more as the price goes down
-        value = position.price * size  # original value
-        value += (position.price - price) * size  # increased value
-        return value
+        # original value
+        value = Decimal(str(position.size)) * Decimal(str(size))
+        # increased value
+        value += (Decimal(str(position.price)) - Decimal(str(price))) * Decimal(str(size))
+        return float(value)
 
     def _getcommission(self, size, price, pseudoexec):
         """Calculates the commission of an operation at a given price
@@ -244,9 +248,10 @@ class CommInfoBase(with_metaclass(MetaParams)):
     def confirmexec(self, size, price):
         return self._getcommission(size, price, pseudoexec=False)
 
-    def profitandloss(self, size, price, newprice):
+    def profitandloss(self, size: float, price: float, newprice: float) -> float:
         """Return actual profit and loss a position has"""
-        return size * (newprice - price) * self.p.mult
+        value = Decimal(str(size)) * (Decimal(str(newprice)) - Decimal(str(price))) * Decimal(str(self.p.mult))
+        return float(value)
 
     def cashadjust(self, size, price, newprice):
         """Calculates cash adjustment for a given price difference"""
