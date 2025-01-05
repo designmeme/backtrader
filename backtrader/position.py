@@ -23,6 +23,7 @@ from __future__ import (absolute_import, division, print_function,
 
 
 from copy import copy
+from decimal import Decimal
 
 
 class Position(object):
@@ -31,7 +32,7 @@ class Position(object):
     relationship to any asset. It only keeps size and price.
 
     Member Attributes:
-      - size (int): current size of the position
+      - size (float): current size of the position
       - price (float): current price of the position
 
     The Position instances can be tested using len(position) to see if size
@@ -50,7 +51,7 @@ class Position(object):
         items.append('--- Position End')
         return '\n'.join(items)
 
-    def __init__(self, size=0, price=0.0):
+    def __init__(self, size=0.0, price=0.0):
         self.size = size
         if size:
             self.price = self.price_orig = price
@@ -74,25 +75,25 @@ class Position(object):
     def set(self, size, price):
         if self.size > 0:
             if size > self.size:
-                self.upopened = size - self.size  # new 10 - old 5 -> 5
+                self.upopened = float(Decimal(str(size)) - Decimal(str(self.size)))  # new 10 - old 5 -> 5
                 self.upclosed = 0
             else:
                 # same side min(0, 3) -> 0 / reversal min(0, -3) -> -3
                 self.upopened = min(0, size)
                 # same side min(10, 10 - 5) -> 5
                 # reversal min(10, 10 - -5) -> min(10, 15) -> 10
-                self.upclosed = min(self.size, self.size - size)
+                self.upclosed = min(self.size, float(Decimal(str(self.size)) - Decimal(str(size))))
 
         elif self.size < 0:
             if size < self.size:
-                self.upopened = size - self.size  # ex: -5 - -3 -> -2
+                self.upopened = float(Decimal(str(size)) - Decimal(str(self.size)))  # ex: -5 - -3 -> -2
                 self.upclosed = 0
             else:
                 # same side max(0, -5) -> 0 / reversal max(0, 5) -> 5
                 self.upopened = max(0, size)
                 # same side max(-10, -10 - -5) -> max(-10, -5) -> -5
                 # reversal max(-10, -10 - 5) -> max(-10, -15) -> -10
-                self.upclosed = max(self.size, self.size - size)
+                self.upclosed = max(self.size, float(Decimal(str(self.size)) - Decimal(str(size))))
 
         else:  # self.size == 0
             self.upopened = self.size
@@ -162,8 +163,7 @@ class Position(object):
 
         self.price_orig = self.price
         oldsize = self.size
-        self.size += size
-        self.size = round(self.size, 8)
+        self.size = float(Decimal(str(self.size)) + Decimal(str(size)))
 
         if not self.size:
             # Update closed existing position
@@ -177,7 +177,9 @@ class Position(object):
 
             if size > 0:  # increased position
                 opened, closed = size, 0
-                self.price = (self.price * oldsize + size * price) / self.size
+                old_value = Decimal(str(self.price)) * Decimal(str(oldsize))
+                new_value = Decimal(str(price)) * Decimal(str(size))
+                self.price = float((old_value + new_value) / Decimal(str(self.size)))
 
             elif self.size > 0:  # reduced position
                 opened, closed = 0, size
@@ -191,7 +193,9 @@ class Position(object):
 
             if size < 0:  # increased position
                 opened, closed = size, 0
-                self.price = (self.price * oldsize + size * price) / self.size
+                old_value = Decimal(str(self.price)) * Decimal(str(oldsize))
+                new_value = Decimal(str(price)) * Decimal(str(size))
+                self.price = float((old_value + new_value) / Decimal(str(self.size)))
 
             elif self.size < 0:  # reduced position
                 opened, closed = 0, size
@@ -201,7 +205,6 @@ class Position(object):
                 opened, closed = self.size, -oldsize
                 self.price = price
 
-        self.price = round(self.price, 8)
         self.upopened = opened
         self.upclosed = closed
 
