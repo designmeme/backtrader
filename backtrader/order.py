@@ -25,6 +25,7 @@ import collections
 from copy import copy
 import datetime
 import itertools
+from decimal import Decimal
 
 from .utils.py3 import range, with_metaclass, iteritems
 
@@ -190,12 +191,12 @@ class OrderData(object):
         # Stores an ExecutionBit and recalculates own values from ExBit
         self.exbits.append(exbit)
 
-        self.remsize -= exbit.size
+        self.remsize = float(Decimal(str(self.remsize)) - Decimal(str(exbit.size)))
 
         self.dt = exbit.dt
         oldvalue = self.size * self.price
         newvalue = exbit.size * exbit.price
-        self.size += exbit.size
+        self.size = float(Decimal(str(self.size)) + Decimal(str(exbit.size)))
         self.price = (oldvalue + newvalue) / self.size
         self.value += exbit.value
         self.comm += exbit.comm
