@@ -348,8 +348,8 @@ class OrderBase(with_metaclass(MetaParams, object)):
             # comparison will later be done against the raw datetime[0] value
             self.valid = self.data.date2num(self.valid)
         elif isinstance(self.valid, datetime.timedelta):
-            # offset with regards to now ... get utcnow + offset
-            # when reading with date2num ... it will be automatically localized
+            # offset in regard to now ... get utcnow + offset
+            # when reading with date2num() ... it will be automatically localized
             if self.valid == self.DAY:
                 valid = datetime.datetime.combine(
                     self.data.datetime.date(), datetime.time(23, 59, 59, 9999))
@@ -544,7 +544,7 @@ class Order(OrderBase):
         This can happen during order submission (and therefore the order will
         not reach the Accepted status) or before execution with each new bar
         price because cash has been drawn by other sources (future-like
-        instruments may have reduced the cash or orders orders may have been
+        instruments may have reduced the cash or orders may have been
         executed)
 
     Member Attributes:
