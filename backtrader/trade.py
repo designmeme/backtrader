@@ -229,7 +229,7 @@ class Trade(object):
 
         Updates may be received twice for each order, once for the existing
         size which has been closed (sell undoing a buy) and a second time for
-        the the opening part (sell reversing a buy)
+        the opening part (sell reversing a buy)
 
         Args:
             order: the order object which has (completely or partially)
@@ -254,7 +254,7 @@ class Trade(object):
         # Commission can only increase
         self.commission += commission
 
-        # Update size and keep a reference for logic an calculations
+        # Update size and keep a reference for logic a calculations
         oldsize = self.size
         self.size += size  # size will carry the opposite sign if reducing
         self.size = round(self.size, 8)
