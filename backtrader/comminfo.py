@@ -225,7 +225,7 @@ class CommInfoBase(with_metaclass(MetaParams)):
 
         # With stocks, a short position is worth more as the price goes down
         # original value
-        value = Decimal(str(position.size)) * Decimal(str(size))
+        value = Decimal(str(position.price)) * Decimal(str(size))
         # increased value
         value += (Decimal(str(position.price)) - Decimal(str(price))) * Decimal(str(size))
         return float(value)
