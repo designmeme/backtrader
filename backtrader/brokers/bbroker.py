@@ -251,14 +251,15 @@ class BackBroker(bt.BrokerBase):
     def init(self):
         super(BackBroker, self).init()
         self.startingcash = self.cash = self.p.cash
-        self._value = self.cash
-        self._valuemkt = 0.0  # no open position
 
-        self._valuelever = 0.0  # no open position
-        self._valuemktlever = 0.0  # no open position
+        self._value = self.cash  # total value(position value + cash)
+        self._valuemkt = 0.0  # position value
 
-        self._leverage = 1.0  # initially nothing is open
-        self._unrealized = 0.0  # no open position
+        self._valuelever = 0.0  # total value(position value + cash) (leveraged)
+        self._valuemktlever = 0.0  # position value (leveraged)
+
+        self._leverage = 1.0  # current position value leverage = self._valuemktlever / self._valuemkt
+        self._unrealized = 0.0  # unrealized pnl
 
         self.orders = list()  # will only be appending
         self.pending = collections.deque()  # popleft and append(right)
@@ -417,6 +418,7 @@ class BackBroker(bt.BrokerBase):
     getvalue = get_value
 
     def get_value_lever(self, datas=None, mkt=False):
+        # ?? todo lever=False 값이 기본인데도, 왜 따로 메소드를 만들었나?
         return self.get_value(datas=datas, mkt=mkt)
 
     def _get_value(self, datas=None, lever=False):
