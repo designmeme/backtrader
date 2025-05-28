@@ -669,7 +669,11 @@ class _LineDelay(LineActions):
         ago = self.ago
 
         for i in range(start, end):
-            dst[i] = src[i + ago]
+            try:
+                dst[i] = src[i + ago]
+            except IndexError:
+                # fix error: 데이터 길이보다 지표 period 값이 더 긴 경우(self._minperiod > self.buflen()) 에러 방지
+                pass
 
 
 class _LineForward(LineActions):

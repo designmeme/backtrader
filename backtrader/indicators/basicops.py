@@ -407,9 +407,13 @@ class ExponentialSmoothing(Average):
         alpha1 = self.alpha1
 
         # Seed value from SMA calculated with the call to oncestart
-        prev = larray[start - 1]
-        for i in range(start, end):
-            larray[i] = prev = prev * alpha1 + darray[i] * alpha
+        try:
+            prev = larray[start - 1]
+            for i in range(start, end):
+                larray[i] = prev = prev * alpha1 + darray[i] * alpha
+        except IndexError:
+            # fix error: 데이터 길이보다 지표 period 값이 더 긴 경우(self._minperiod > self.buflen()) 에러 방지
+            pass
 
 
 class ExponentialSmoothingDynamic(ExponentialSmoothing):

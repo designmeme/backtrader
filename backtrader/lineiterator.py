@@ -294,7 +294,11 @@ class LineIterator(with_metaclass(MetaLineIterator, LineSeries)):
         self.forward(size=self._clock.buflen())
 
         for indicator in self._lineiterators[LineIterator.IndType]:
-            indicator._once()
+            try:
+                indicator._once()
+            except IndexError:
+                # fix error: 데이터 길이보다 지표 period 값이 더 긴 경우(self._minperiod > self.buflen()) 에러 방지
+                pass
 
         for observer in self._lineiterators[LineIterator.ObsType]:
             observer.forward(size=self.buflen())
@@ -313,9 +317,13 @@ class LineIterator(with_metaclass(MetaLineIterator, LineSeries)):
         # These 3 remain empty for a strategy and therefore play no role
         # because a strategy will always be executed on a next basis
         # indicators are each called with its min period
-        self.preonce(0, self._minperiod - 1)
-        self.oncestart(self._minperiod - 1, self._minperiod)
-        self.once(self._minperiod, self.buflen())
+        try:
+            self.preonce(0, self._minperiod - 1)
+            self.oncestart(self._minperiod - 1, self._minperiod)
+            self.once(self._minperiod, self.buflen())
+        except IndexError:
+            # fix error: 데이터 길이보다 지표 period 값이 더 긴 경우(self._minperiod > self.buflen()) 에러 방지
+            pass
 
         for line in self.lines:
             line.oncebinding()
